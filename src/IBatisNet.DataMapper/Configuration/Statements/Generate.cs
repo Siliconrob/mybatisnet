@@ -25,63 +25,80 @@
 #endregion
 
 using System;
-using System.Data;
 using System.Xml.Serialization;
 
 namespace IBatisNet.DataMapper.Configuration.Statements
 {
-	/// <summary>
-	/// Represent a generate tag element.
-	/// The generation would happen at the point where the 
-	/// SqlMapClient instance is built.
-	/// </summary>
-	[Serializable]
-	[XmlRoot("generate", Namespace="http://ibatis.apache.org/mapping")]
-	public class Generate : Statement
-	{
-		#region Fields
+    /// <summary>
+    /// Represent a generate tag element.
+    /// The generation would happen at the point where the 
+    /// SqlMapClient instance is built.
+    /// </summary>
+    [Serializable]
+    [XmlRoot("generate", Namespace="http://ibatis.apache.org/mapping")]
+    public class Generate : Statement
+    {
+        #region Fields
 
-		[NonSerialized]
-		private string _table = string.Empty;
-		[NonSerialized]
-		private string _by = string.Empty;
+        [NonSerialized]
+        private string _table = string.Empty;
+        [NonSerialized]
+        private string _by = string.Empty;
+        [NonSerialized]
+        private string _rowVersion = string.Empty;
 
-		#endregion
+        #endregion
 
-		/// <summary>
-		/// The table name used to build the SQL query. 
-		/// </summary>
-		/// <remarks>
-		/// Will be used to get the metadata to build the SQL if needed.
-		/// </remarks>
-		[XmlAttribute("table")]
-		public string Table
-		{
-			get { return _table; }
-			set { _table = value; }
-		}
+        /// <summary>
+        /// The table name used to build the SQL query. 
+        /// </summary>
+        /// <remarks>
+        /// Will be used to get the metadata to build the SQL if needed.
+        /// </remarks>
+        [XmlAttribute("table")]
+        public string Table
+        {
+            get { return _table; }
+            set { _table = value; }
+        }
 
-		/// <summary>
-		/// The by attribute is used to generate the where clause.
-		/// </summary>
-		/// <remarks>The by="" attribute can support multiple colums.</remarks>
-		/// <example> 
-		///		&lt; delete ...&gt;
-		///			&lt;generate table="EMPLOYEE" by="EMPLOYEE_ID, LAST_MOD_DATE" /&gt;
-		///		&lt;/delete&gt;
-		/// </example>
-		[XmlAttribute("by")]
-		public string By
-		{
-			get { return _by; }
-			set { _by = value; }
-		}
+        /// <summary>
+        /// The by attribute is used to generate the where clause.
+        /// </summary>
+        /// <remarks>The by="" attribute can support multiple colums.</remarks>
+        /// <example> 
+        ///		&lt; delete ...&gt;
+        ///			&lt;generate table="EMPLOYEE" by="EMPLOYEE_ID, LAST_MOD_DATE" /&gt;
+        ///		&lt;/delete&gt;
+        /// </example>
+        [XmlAttribute("by")]
+        public string By
+        {
+            get { return _by; }
+            set { _by = value; }
+        }
 
-		/// <summary>
-		/// Do not use direclty, only for serialization.
-		/// </summary>
-		public Generate():base(){}
+        /// <summary>
+        /// The row version column used to generate the where clause.
+        /// </summary>
+        /// <remarks>Only used for updates. Value in updated entity is assumed to have the value after update, so where will be current value - 1.</remarks>
+        /// <example> 
+        ///		&lt; delete ...&gt;
+        ///			&lt;generate table="EMPLOYEE" by="EMPLOYEE_ID, LAST_MOD_DATE" /&gt;
+        ///		&lt;/delete&gt;
+        /// </example>
+        [XmlAttribute("rowversion")]
+        public string RowVersion
+        {
+            get { return _rowVersion; }
+            set { _rowVersion = value; }
+        }
+
+        /// <summary>
+        /// Do not use direclty, only for serialization.
+        /// </summary>
+        public Generate():base(){}
 
 
-	}
+    }
 }

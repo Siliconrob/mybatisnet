@@ -1,6 +1,5 @@
 using System;
 using System.Reflection;
-using System.Security;
 
 
 //
@@ -38,4 +37,4 @@ using System.Security;
 [assembly: AssemblyTitle("IBatisNet.DataMapper")]
 [assembly: AssemblyDescription("Map objects to your SQL statements or stored procedures.")]
 
-[assembly: AssemblyVersion("1.6.2")]
+[assembly: AssemblyVersion("1.6.3")]

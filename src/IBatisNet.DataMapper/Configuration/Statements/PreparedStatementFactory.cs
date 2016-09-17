@@ -484,9 +484,50 @@ namespace IBatisNet.DataMapper.Configuration.Statements
 					sqlParamName = string.Empty;
 					index ++;
 				}
-				else
+                else
 				{
-					newCommandTextBuffer.Append(token);
+                    int startPos = token.IndexOf('#');
+                    int endPos = token.LastIndexOf('#');
+
+                    if (startPos != endPos)
+                    {
+                        string name = token.Substring(startPos + 1, endPos - startPos - 1);
+
+                        if (_session.DataSource.DbProvider.UsePositionalParameters)
+                            throw new InvalidOperationException("Can't use parameter name reference with positional parameters.");
+
+                        ParameterProperty property = _request.ParameterMap.GetProperty(name);
+                        IDataParameter dataParameter = dataParameter = (IDataParameter)_propertyDbParameterMap[property];
+
+                        // 5 May 2004
+                        // Need to check UseParameterPrefixInParameter here 
+                        // since CreateParametersForStatementText now does
+                        // a check for UseParameterPrefixInParameter before 
+                        // creating the parameter name!
+                        if (_session.DataSource.DbProvider.UseParameterPrefixInParameter)
+                        {
+                            // Fix ByteFX.Data.MySqlClient.MySqlParameter
+                            // who strip prefix in Parameter Name ?!
+                            if (_session.DataSource.DbProvider.Name.IndexOf("ByteFx") >= 0)
+                            {
+                                sqlParamName = _parameterPrefix + dataParameter.ParameterName;
+                            }
+                            else
+                            {
+                                sqlParamName = dataParameter.ParameterName;
+                            }
+                        }
+                        else
+                        {
+                            sqlParamName = _parameterPrefix + dataParameter.ParameterName;
+                        }
+
+                        token = token.Replace("#" + name + "#", sqlParamName);
+
+                        sqlParamName = string.Empty;
+                    }
+
+                    newCommandTextBuffer.Append(token);
 				}
 			}
 
