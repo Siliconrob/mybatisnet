@@ -430,9 +430,9 @@ namespace IBatisNet.DataAccess.DaoSessionHandlers
 		{
 			IDbCommand command = null;
 
-            command = _dataSource.DbProvider.CreateCommand();
+            command = _connection.CreateCommand();// _dataSource.DbProvider.CreateCommand();
 			command.CommandType = commandType;
-			command.Connection = _connection;
+			//command.Connection = _connection;
 
 			// Assign transaction
 			if (_transaction != null)

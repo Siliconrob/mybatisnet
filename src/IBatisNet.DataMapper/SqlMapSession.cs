@@ -455,10 +455,10 @@ namespace IBatisNet.DataMapper
 		/// <returns></returns>
 		public IDbCommand CreateCommand(CommandType commandType)
 		{
-			IDbCommand command = _dataSource.DbProvider.CreateCommand();
+            IDbCommand command = _connection.CreateCommand();//_dataSource.DbProvider.CreateCommand();
             command.CommandTimeout = _dataSource.DbProvider.DbCommandTimeout;
 			command.CommandType = commandType;
-			command.Connection = _connection;
+			//command.Connection = _connection;
 			
 			// Assign transaction
 			if (_transaction != null)
