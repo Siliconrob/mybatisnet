@@ -78,8 +78,12 @@ namespace IBatisNet.Common
         [NonSerialized] private bool _useParameterPrefixInSql = true;
         [NonSerialized] private bool _usePositionalParameters;
 
+        [NonSerialized]
+        private string _connectionAdapterClass = string.Empty;
+        [NonSerialized]
+        private IConnectionAdapter _connectionAdapter = null;
 
-//		private static readonly ILog _connectionLogger = LogManager.GetLogger("System.Data.IDbConnection");
+        //		private static readonly ILog _connectionLogger = LogManager.GetLogger("System.Data.IDbConnection");
 
         #endregion
 
@@ -170,6 +174,20 @@ namespace IBatisNet.Common
                 _connectionClass = value;
             }
         }
+
+        /// <summary>
+        /// The connection adapter class name to use, if any.
+        /// </summary>
+        [XmlAttribute("connectionAdapterClass")]
+        public string ConnectionAdapterClass
+        {
+            get { return _connectionAdapterClass; }
+            set
+            {
+                _connectionAdapterClass = value;
+            }
+        }
+
 
         /// <summary>
         /// Does this ConnectionProvider require the use of a Named Prefix in the SQL 
@@ -479,6 +497,19 @@ namespace IBatisNet.Common
 
                 _templateConnectionIsICloneable = _templateConnection is ICloneable;
                 _templateDataAdapterIsICloneable = _templateDataAdapter is ICloneable;
+
+                if (!string.IsNullOrWhiteSpace(_connectionAdapterClass))
+                {
+                    Type connectionAdapterType;
+
+                    if (_connectionAdapterClass.IndexOf(',') > 0)
+                        connectionAdapterType = TypeUtils.ResolveType(_connectionAdapterClass);
+                    else
+                        connectionAdapterType = assembly.GetType(_connectionAdapterClass, true);
+
+                    _connectionAdapter = (IConnectionAdapter)Activator.CreateInstance(connectionAdapterType);
+                }
+
             }
             catch (Exception e)
             {
@@ -501,15 +532,22 @@ namespace IBatisNet.Common
             // IDbCommand.Connection = cmdConnection
             // .NET cast the cmdConnection to the real type (as SqlConnection)
             // and we pass a proxy --> exception invalid cast !
-//			if (_connectionLogger.IsDebugEnabled)
-//			{
-//				connection = (IDbConnection)IDbConnectionProxy.NewInstance(connection, this);
-//			}
+            //			if (_connectionLogger.IsDebugEnabled)
+            //			{
+            //				connection = (IDbConnection)IDbConnectionProxy.NewInstance(connection, this);
+            //			}
+
+            IDbConnection cn;
+
             if (_templateConnectionIsICloneable)
-            {
-                return (IDbConnection) ((ICloneable) _templateConnection).Clone();
-            }
-            return (IDbConnection) Activator.CreateInstance(_templateConnection.GetType());
+                cn = (IDbConnection) ((ICloneable) _templateConnection).Clone();
+            else
+                cn = (IDbConnection) Activator.CreateInstance(_templateConnection.GetType());
+
+            if (_connectionAdapter != null)
+                cn = _connectionAdapter.Adapt(cn);
+
+            return cn;
         }
 
 

@@ -140,6 +140,7 @@
     <Compile Include="Exceptions\ProbeException.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="IConnectionAdapter.cs" />
     <Compile Include="IDalSession.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -56,21 +56,27 @@ namespace IBatisNet.Common
 		[XmlAttribute("connectionClass")]
 		string DbConnectionClass { get; set; }
 
-		/// <summary>
-		/// Does this ConnectionProvider require the use of a Named Prefix in the SQL 
-		/// statement. 
-		/// </summary>
-		/// <remarks>
-		/// The OLE DB/ODBC .NET Provider does not support named parameters for 
-		/// passing parameters to an SQL Statement or a stored procedure called 
-		/// by an IDbCommand when CommandType is set to Text.
-		/// 
-		/// For example, SqlClient requires select * from simple where simple_id = @simple_id
-		/// If this is false, like with the OleDb or Obdc provider, then it is assumed that 
-		/// the ? can be a placeholder for the parameter in the SQL statement when CommandType 
-		/// is set to Text.		
-		/// </remarks>
-		[XmlAttribute("useParameterPrefixInSql")]
+        /// <summary>
+        /// The connection adapter class name to use, if any.
+        /// </summary>
+        [XmlAttribute("connectionAdapterClass")]
+        string ConnectionAdapterClass { get; set; }
+
+        /// <summary>
+        /// Does this ConnectionProvider require the use of a Named Prefix in the SQL 
+        /// statement. 
+        /// </summary>
+        /// <remarks>
+        /// The OLE DB/ODBC .NET Provider does not support named parameters for 
+        /// passing parameters to an SQL Statement or a stored procedure called 
+        /// by an IDbCommand when CommandType is set to Text.
+        /// 
+        /// For example, SqlClient requires select * from simple where simple_id = @simple_id
+        /// If this is false, like with the OleDb or Obdc provider, then it is assumed that 
+        /// the ? can be a placeholder for the parameter in the SQL statement when CommandType 
+        /// is set to Text.		
+        /// </remarks>
+        [XmlAttribute("useParameterPrefixInSql")]
 		bool UseParameterPrefixInSql { get; set; }
 
 		/// <summary>

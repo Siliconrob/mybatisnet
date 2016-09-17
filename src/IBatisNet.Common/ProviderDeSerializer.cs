@@ -53,7 +53,8 @@ namespace IBatisNet.Common
 			provider.DbCommandClass = prop["commandClass"];
             provider.DbCommandTimeout = NodeUtils.GetIntAttribute(prop,"commandTimeout",30);
 			provider.DbConnectionClass = prop["connectionClass"];
-			provider.DataAdapterClass = prop["dataAdapterClass"];
+            provider.ConnectionAdapterClass = prop["connectionAdapterClass"];
+            provider.DataAdapterClass = prop["dataAdapterClass"];
 			provider.Description = prop["description"];
 			provider.IsDefault = NodeUtils.GetBooleanAttribute(prop, "default", false);
 			provider.IsEnabled = NodeUtils.GetBooleanAttribute(prop, "enabled", true);
