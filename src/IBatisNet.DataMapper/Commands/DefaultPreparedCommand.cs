@@ -172,11 +172,15 @@ namespace IBatisNet.DataMapper.Commands
 				#region Logging
 				if (_logger.IsDebugEnabled)
 				{
-					if (parameterCopy.Value == DBNull.Value) 
+					if (parameterCopy.Value == DBNull.Value || parameterCopy.Value == null) 
 					{
                         paramLogList.Append("null");
                         paramLogList.Append("], ");
-                        typeLogList.Append("System.DBNull, null");
+
+                        if (parameterCopy.Value == null)
+                            typeLogList.Append("null, null");
+                        else
+                            typeLogList.Append("System.DBNull, null");
                         typeLogList.Append("], ");
 					} 
 					else 
