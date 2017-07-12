@@ -124,11 +124,10 @@ namespace IBatisNet.DataMapper.Configuration.Sql.Dynamic.Handlers
             Type type = null;
             if (propertyName != null && propertyName.Length > 0)
             {
-                // check to see if we are a list
-                //if (fpropertyName.StartsWith("["))
-                //{
+                IterateContext iterate = ctx.PeekIterateContext();
 
-                //}
+                if (iterate != null)
+                    propertyName = propertyName.Replace("[]", "[" + (iterate.Index + 1) + "]");
 
                 value1 = ObjectProbe.GetMemberValue(parameterObject, propertyName, AccessorFactory);
                 type = value1.GetType();

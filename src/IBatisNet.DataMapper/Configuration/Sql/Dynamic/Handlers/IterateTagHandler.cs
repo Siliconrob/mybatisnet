@@ -74,6 +74,8 @@ namespace IBatisNet.DataMapper.Configuration.Sql.Dynamic.Handlers
 				}
 				iterate = new IterateContext(collection);
 				ctx.AddAttribute(tag, iterate);
+
+                ctx.PushIterateContext(iterate);
 			}
 			if (iterate != null && iterate.HasNext) 
 			{
@@ -158,6 +160,8 @@ namespace IBatisNet.DataMapper.Configuration.Sql.Dynamic.Handlers
 			} 
 			else 
 			{
+                ctx.PopIterateContext();
+
 				return BaseTagHandler.INCLUDE_BODY;
 			}
 		}

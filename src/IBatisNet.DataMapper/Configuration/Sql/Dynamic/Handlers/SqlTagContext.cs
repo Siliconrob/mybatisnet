@@ -30,121 +30,140 @@ using System.Collections;
 using System.Text;
 using IBatisNet.DataMapper.Configuration.ParameterMapping;
 using IBatisNet.DataMapper.Configuration.Sql.Dynamic.Elements;
+using System.Collections.Generic;
 
 #endregion
 
 
 namespace IBatisNet.DataMapper.Configuration.Sql.Dynamic.Handlers
 {
-	/// <summary>
-	/// Summary description for SqlTagContext.
-	/// </summary>
-	public sealed class SqlTagContext
-	{
-		#region Fields
-		private Hashtable _attributes = new Hashtable();
-		private bool _overridePrepend = false;
-		private SqlTag _firstNonDynamicTagWithPrepend = null;
-		private ArrayList _parameterMappings = new ArrayList();
-		private StringBuilder buffer = new StringBuilder();
-		#endregion
+    /// <summary>
+    /// Summary description for SqlTagContext.
+    /// </summary>
+    public sealed class SqlTagContext
+    {
+        #region Fields
+        private Hashtable _attributes = new Hashtable();
+        private bool _overridePrepend = false;
+        private SqlTag _firstNonDynamicTagWithPrepend = null;
+        private ArrayList _parameterMappings = new ArrayList();
+        private StringBuilder buffer = new StringBuilder();
+        Stack<IterateContext> _iterates = new Stack<IterateContext>();
+        #endregion    
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        public SqlTagContext()
+        {
+            _overridePrepend = false;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public StringBuilder GetWriter()
+        {
+            return buffer;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string BodyText
+        {
+            get
+            {
+                return buffer.ToString().Trim();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool IsOverridePrepend
+        {
+            set
+            {
+                _overridePrepend = value;
+            }
+            get
+            {
+                return _overridePrepend;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public SqlTag FirstNonDynamicTagWithPrepend
+        {
+            get
+            {
+                return _firstNonDynamicTagWithPrepend;
+            }
+            set
+            {
+                _firstNonDynamicTagWithPrepend = value;
+            }
+        }
 
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public SqlTagContext() 
-		{
-			_overridePrepend = false;
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="value"></param>
+        public void AddAttribute(object key, object value)
+        {
+            _attributes.Add(key, value);
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <returns></returns>
-		public StringBuilder GetWriter() 
-		{
-			return buffer;
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public object GetAttribute(object key)
+        {
+            return _attributes[key];
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public string BodyText 
-		{
-			get
-			{
-				return buffer.ToString().Trim();
-			}
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="mapping"></param>
+        public void AddParameterMapping(ParameterProperty mapping)
+        {
+            _parameterMappings.Add(mapping);
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public bool IsOverridePrepend
-		{
-			set
-			{
-				_overridePrepend = value;
-			}
-			get
-			{
-				return _overridePrepend;
-			}
-		}
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public IList GetParameterMappings()
+        {
+            return _parameterMappings;
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		public SqlTag FirstNonDynamicTagWithPrepend
-		{
-			get
-			{
-				return _firstNonDynamicTagWithPrepend;
-			}
-			set
-			{
-				_firstNonDynamicTagWithPrepend = value;
-			}
-		}
+        public void PushIterateContext(IterateContext iterate)
+        {
+            _iterates.Push(iterate);
+        }
 
+        public IterateContext PeekIterateContext()
+        {
+            if (_iterates.Count > 0)
+                return _iterates.Peek();
+            else
+                return null;
+        }
 
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="key"></param>
-		/// <param name="value"></param>
-		public void AddAttribute(object key, object value) 
-		{
-			_attributes.Add(key, value);
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="key"></param>
-		/// <returns></returns>
-		public object GetAttribute(object key) 
-		{
-			return _attributes[key];
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <param name="mapping"></param>
-		public void AddParameterMapping(ParameterProperty mapping) 
-		{
-			_parameterMappings.Add(mapping);
-		}
-
-		/// <summary>
-		/// 
-		/// </summary>
-		/// <returns></returns>
-		public IList GetParameterMappings() 
-		{
-			return _parameterMappings;
-		}
-	}
+        public IterateContext PopIterateContext()
+        {
+            return _iterates.Pop();
+        }
+    }
 }
