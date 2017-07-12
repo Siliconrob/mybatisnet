@@ -260,6 +260,17 @@ namespace IBatisNet.DataMapper.Configuration.Sql.Dynamic.Handlers
             {
                 return Convert.ToSingle(value);
             }
+            else if (type.IsEnum)
+            {
+                try
+                {
+                    return Enum.Parse(type, value);
+                }
+                catch
+                {
+                    return value;
+                }
+            }
             else
             {
                 return value;
