@@ -486,6 +486,7 @@ namespace IBatisNet.DataMapper.Configuration.ResultMapping
 
             if (IsLazyLoad)
             {
+                throw new InvalidOperationException("lazy not supported until we fix session");
                 _lazyFactory = new LazyFactoryBuilder().GetLazyFactory(_setAccessor.MemberType);
             }
 		}

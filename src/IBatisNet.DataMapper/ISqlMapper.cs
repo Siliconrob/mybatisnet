@@ -66,7 +66,7 @@ namespace IBatisNet.DataMapper
         /// <example>
         /// sqlMapper.SessionStore = new HybridWebThreadSessionStore( sqlMapper.Id );
         /// </example>
-        ISessionStore SessionStore { set; }
+        //ISessionStore SessionStore { set; }
         
         /// <summary>
         /// Gets a value indicating whether this instance is session started.
@@ -74,13 +74,13 @@ namespace IBatisNet.DataMapper
         /// <value>
         /// 	<c>true</c> if this instance is session started; otherwise, <c>false</c>.
         /// </value>
-        bool IsSessionStarted { get; }
+        //bool IsSessionStarted { get; }
         
         /// <summary>
         ///  Returns the DalSession instance 
         ///  currently being used by the SqlMap.
         /// </summary>
-        ISqlMapSession LocalSession { get; }
+        //ISqlMapSession LocalSession { get; }
 
         /// <summary>
         /// Gets the DB helper parameter cache.
@@ -181,73 +181,73 @@ namespace IBatisNet.DataMapper
         /// <param name="mappedStatement">The statement to add</param>
         void AddMappedStatement(string key, IMappedStatement mappedStatement);
         
-        /// <summary>
-        /// Begins the transaction.
-        /// </summary>
-        /// <returns></returns>
-        ISqlMapSession BeginTransaction();
+        ///// <summary>
+        ///// Begins the transaction.
+        ///// </summary>
+        ///// <returns></returns>
+        //ISqlMapSession BeginTransaction();
 
-        /// <summary>
-        /// Begins the transaction.
-        /// </summary>
-        /// <param name="openConnection">if set to <c>true</c> [open connection].</param>
-        /// <returns></returns>
-        ISqlMapSession BeginTransaction(bool openConnection);
+        ///// <summary>
+        ///// Begins the transaction.
+        ///// </summary>
+        ///// <param name="openConnection">if set to <c>true</c> [open connection].</param>
+        ///// <returns></returns>
+        //ISqlMapSession BeginTransaction(bool openConnection);
 
-        /// <summary>
-        /// Begins the transaction.
-        /// </summary>
-        /// <param name="connectionString">The connection string.</param>
-        /// <returns></returns>
-        ISqlMapSession BeginTransaction(string connectionString);
+        ///// <summary>
+        ///// Begins the transaction.
+        ///// </summary>
+        ///// <param name="connectionString">The connection string.</param>
+        ///// <returns></returns>
+        //ISqlMapSession BeginTransaction(string connectionString);
 
-        /// <summary>
-        /// Begins the transaction.
-        /// </summary>
-        /// <param name="openNewConnection">if set to <c>true</c> [open new connection].</param>
-        /// <param name="isolationLevel">The isolation level.</param>
-        /// <returns></returns>
-        ISqlMapSession BeginTransaction(bool openNewConnection, IsolationLevel isolationLevel);
+        ///// <summary>
+        ///// Begins the transaction.
+        ///// </summary>
+        ///// <param name="openNewConnection">if set to <c>true</c> [open new connection].</param>
+        ///// <param name="isolationLevel">The isolation level.</param>
+        ///// <returns></returns>
+        //ISqlMapSession BeginTransaction(bool openNewConnection, IsolationLevel isolationLevel);
 
-        /// <summary>
-        /// Begins the transaction.
-        /// </summary>
-        /// <param name="connectionString">The connection string.</param>
-        /// <param name="openNewConnection">if set to <c>true</c> [open new connection].</param>
-        /// <param name="isolationLevel">The isolation level.</param>
-        /// <returns></returns>
-        ISqlMapSession BeginTransaction(string connectionString, bool openNewConnection, IsolationLevel isolationLevel);
+        ///// <summary>
+        ///// Begins the transaction.
+        ///// </summary>
+        ///// <param name="connectionString">The connection string.</param>
+        ///// <param name="openNewConnection">if set to <c>true</c> [open new connection].</param>
+        ///// <param name="isolationLevel">The isolation level.</param>
+        ///// <returns></returns>
+        //ISqlMapSession BeginTransaction(string connectionString, bool openNewConnection, IsolationLevel isolationLevel);
 
-        /// <summary>
-        /// Begins the transaction.
-        /// </summary>
-        /// <param name="isolationLevel">The isolation level.</param>
-        /// <returns></returns>
-        ISqlMapSession BeginTransaction(IsolationLevel isolationLevel);
+        ///// <summary>
+        ///// Begins the transaction.
+        ///// </summary>
+        ///// <param name="isolationLevel">The isolation level.</param>
+        ///// <returns></returns>
+        //ISqlMapSession BeginTransaction(IsolationLevel isolationLevel);
 
-        /// <summary>
-        /// Begins the transaction.
-        /// </summary>
-        /// <param name="connectionString">The connection string.</param>
-        /// <param name="isolationLevel">The isolation level.</param>
-        /// <returns></returns>
-        ISqlMapSession BeginTransaction(string connectionString, IsolationLevel isolationLevel);
+        ///// <summary>
+        ///// Begins the transaction.
+        ///// </summary>
+        ///// <param name="connectionString">The connection string.</param>
+        ///// <param name="isolationLevel">The isolation level.</param>
+        ///// <returns></returns>
+        //ISqlMapSession BeginTransaction(string connectionString, IsolationLevel isolationLevel);
        
-        /// <summary>
-        /// Closes the connection.
-        /// </summary>
-        void CloseConnection();
+        ///// <summary>
+        ///// Closes the connection.
+        ///// </summary>
+        //void CloseConnection();
         
-        /// <summary>
-        /// Commits the transaction.
-        /// </summary>
-        /// <param name="closeConnection">if set to <c>true</c> [close connection].</param>
-        void CommitTransaction(bool closeConnection);
+        ///// <summary>
+        ///// Commits the transaction.
+        ///// </summary>
+        ///// <param name="closeConnection">if set to <c>true</c> [close connection].</param>
+        //void CommitTransaction(bool closeConnection);
        
-        /// <summary>
-        /// Commits the transaction.
-        /// </summary>
-        void CommitTransaction();
+        ///// <summary>
+        ///// Commits the transaction.
+        ///// </summary>
+        //void CommitTransaction();
 
         /// <summary>
         /// Gets or sets the data source.
@@ -262,7 +262,7 @@ namespace IBatisNet.DataMapper
         /// <param name="statementName">The name of the statement to execute.</param>
         /// <param name="parameterObject">The parameter object.</param>
         /// <returns>The number of rows effected.</returns>
-        int Delete(string statementName, object parameterObject);
+        int Delete(string statementName, object parameterObject, ISqlMapSession session);
 
         /// <summary>
         /// Flushes all cached objects that belong to this SqlMap
@@ -298,20 +298,20 @@ namespace IBatisNet.DataMapper
         /// This might be automatically generated by the RDBMS, 
         /// or selected from a sequence table or other source.
         /// </returns>
-        object Insert(string statementName, object parameterObject);
+        object Insert(string statementName, object parameterObject, ISqlMapSession session);
 
-        /// <summary>
-        /// Opens the connection.
-        /// </summary>
-        /// <returns></returns>
-        ISqlMapSession OpenConnection();
+        ///// <summary>
+        ///// Opens the connection.
+        ///// </summary>
+        ///// <returns></returns>
+        //ISqlMapSession OpenConnection();
 
-        /// <summary>
-        /// Opens the connection.
-        /// </summary>
-        /// <param name="connectionString">The connection string.</param>
-        /// <returns></returns>
-        ISqlMapSession OpenConnection(string connectionString);
+        ///// <summary>
+        ///// Opens the connection.
+        ///// </summary>
+        ///// <param name="connectionString">The connection string.</param>
+        ///// <returns></returns>
+        //ISqlMapSession OpenConnection(string connectionString);
 
         /// <summary>
         /// Alias to QueryForMap, .NET spirit.
@@ -323,7 +323,7 @@ namespace IBatisNet.DataMapper
         /// <param name="valueProperty">The property of the result object to be used as the value (or null)</param>
         /// <returns>A IDictionary (Hashtable) of object containing the rows keyed by keyProperty.</returns>
         ///<exception cref="DataMapperException">If a transaction is not in progress, or the database throws an exception.</exception>
-        IDictionary QueryForDictionary(string statementName, object parameterObject, string keyProperty, string valueProperty);
+        IDictionary QueryForDictionary(string statementName, object parameterObject, string keyProperty, string valueProperty, ISqlMapSession session);
 
         /// <summary>
         ///  Alias to QueryForMap, .NET spirit.
@@ -333,7 +333,7 @@ namespace IBatisNet.DataMapper
         /// <param name="parameterObject">The object used to set the parameters in the SQL.</param>
         /// <param name="keyProperty">The property of the result object to be used as the key.</param>
         /// <returns>A IDictionary (Hashtable) of object containing the rows keyed by keyProperty.</returns>
-        IDictionary QueryForDictionary(string statementName, object parameterObject, string keyProperty);
+        IDictionary QueryForDictionary(string statementName, object parameterObject, string keyProperty, ISqlMapSession session);
 
         /// <summary>
         /// Executes a Sql SELECT statement that returns data to populate
@@ -346,7 +346,7 @@ namespace IBatisNet.DataMapper
         /// <param name="parameterObject">The object used to set the parameters in the SQL.</param>
         /// <param name="resultObject">An Ilist object used to hold the objects.</param>
         /// <returns>A List of result objects.</returns>
-        void QueryForList(string statementName, object parameterObject, IList resultObject);
+        void QueryForList(string statementName, object parameterObject, IList resultObject, ISqlMapSession session);
 
         /// <summary>
         /// Executes a Sql SELECT statement that returns data to populate
@@ -358,7 +358,7 @@ namespace IBatisNet.DataMapper
         /// <param name="statementName">The name of the sql statement to execute.</param>
         /// <param name="parameterObject">The object used to set the parameters in the SQL.</param>
         /// <returns>A List of result objects.</returns>
-        IList QueryForList(string statementName, object parameterObject);
+        IList QueryForList(string statementName, object parameterObject, ISqlMapSession session);
 
         /// <summary>
         /// Executes the SQL and retuns all rows selected.
@@ -371,7 +371,7 @@ namespace IBatisNet.DataMapper
         /// <param name="skipResults">The number of rows to skip over.</param>
         /// <param name="maxResults">The maximum number of rows to return.</param>
         /// <returns>A List of result objects.</returns>
-        IList QueryForList(string statementName, object parameterObject, int skipResults, int maxResults);
+        IList QueryForList(string statementName, object parameterObject, int skipResults, int maxResults, ISqlMapSession session);
 
 
         /// <summary>
@@ -382,7 +382,7 @@ namespace IBatisNet.DataMapper
         /// <param name="parameterObject">The object used to set the parameters in the SQL.</param>
         /// <param name="keyProperty">The property of the result object to be used as the key.</param>
         /// <returns>A IDictionary (Hashtable) of object containing the rows keyed by keyProperty.</returns>
-        IDictionary QueryForMap(string statementName, object parameterObject, string keyProperty);
+        IDictionary QueryForMap(string statementName, object parameterObject, string keyProperty, ISqlMapSession session);
         
         /// <summary>
         /// Executes the SQL and retuns all rows selected in a map that is keyed on the property named
@@ -395,7 +395,7 @@ namespace IBatisNet.DataMapper
         /// <param name="valueProperty">The property of the result object to be used as the value (or null)</param>
         /// <returns>A IDictionary (Hashtable) of object containing the rows keyed by keyProperty.</returns>
         ///<exception cref="DataMapperException">If a transaction is not in progress, or the database throws an exception.</exception>
-        IDictionary QueryForMap(string statementName, object parameterObject, string keyProperty, string valueProperty);
+        IDictionary QueryForMap(string statementName, object parameterObject, string keyProperty, string valueProperty, ISqlMapSession session);
        
         /// <summary>
         /// Runs a query with a custom object that gets a chance to deal 
@@ -411,7 +411,7 @@ namespace IBatisNet.DataMapper
         /// <param name="rowDelegate"></param>
         /// <returns>A IDictionary (Hashtable) of object containing the rows keyed by keyProperty.</returns>
         ///<exception cref="DataMapperException">If a transaction is not in progress, or the database throws an exception.</exception>
-        IDictionary QueryForMapWithRowDelegate(string statementName, object parameterObject, string keyProperty, string valueProperty, DictionaryRowDelegate rowDelegate);
+        IDictionary QueryForMapWithRowDelegate(string statementName, object parameterObject, string keyProperty, string valueProperty, DictionaryRowDelegate rowDelegate, ISqlMapSession session);
 
         /// <summary>
         /// Executes a Sql SELECT statement that returns a single object of the type of the
@@ -421,7 +421,7 @@ namespace IBatisNet.DataMapper
         /// <param name="parameterObject">The object used to set the parameters in the SQL.</param>
         /// <param name="resultObject">An object of the type to be returned.</param>
         /// <returns>The single result object populated with the result set data.</returns>
-        object QueryForObject(string statementName, object parameterObject, object resultObject);
+        object QueryForObject(string statementName, object parameterObject, object resultObject, ISqlMapSession session);
 
         /// <summary>
         /// Executes a Sql SELECT statement that returns that returns data 
@@ -433,7 +433,7 @@ namespace IBatisNet.DataMapper
         /// <param name="statementName">The name of the sql statement to execute.</param>
         /// <param name="parameterObject">The object used to set the parameters in the SQL.</param>
         /// <returns> The single result object populated with the result set data.</returns>
-        object QueryForObject(string statementName, object parameterObject);
+        object QueryForObject(string statementName, object parameterObject, ISqlMapSession session);
 
         /// <summary>
         /// Executes the SQL and retuns a subset of the results in a dynamic PaginatedList that can be used to
@@ -444,7 +444,7 @@ namespace IBatisNet.DataMapper
         /// <param name="pageSize">The maximum number of objects to store in each page</param>
         /// <returns>A PaginatedList of beans containing the rows</returns>
         [Obsolete("This method will be remove in future version.", false)]
-        PaginatedList QueryForPaginatedList(string statementName, object parameterObject, int pageSize);
+        PaginatedList QueryForPaginatedList(string statementName, object parameterObject, int pageSize, ISqlMapSession session);
 
         /// <summary>
         /// Runs a query for list with a custom object that gets a chance to deal 
@@ -457,18 +457,18 @@ namespace IBatisNet.DataMapper
         /// <param name="parameterObject">The object used to set the parameters in the SQL.</param>
         /// <param name="rowDelegate"></param>
         /// <returns>A List of result objects.</returns>
-        IList QueryWithRowDelegate(string statementName, object parameterObject, RowDelegate rowDelegate);
+        IList QueryWithRowDelegate(string statementName, object parameterObject, RowDelegate rowDelegate, ISqlMapSession session);
         
-        /// <summary>
-        /// Rolls the back transaction.
-        /// </summary>
-        void RollBackTransaction();
+        ///// <summary>
+        ///// Rolls the back transaction.
+        ///// </summary>
+        //void RollBackTransaction();
 
-        /// <summary>
-        /// Rolls the back transaction.
-        /// </summary>
-        /// <param name="closeConnection">if set to <c>true</c> [close connection].</param>
-        void RollBackTransaction(bool closeConnection);
+        ///// <summary>
+        ///// Rolls the back transaction.
+        ///// </summary>
+        ///// <param name="closeConnection">if set to <c>true</c> [close connection].</param>
+        //void RollBackTransaction(bool closeConnection);
 
         /// <summary>
         /// Executes a Sql UPDATE statement.
@@ -482,7 +482,7 @@ namespace IBatisNet.DataMapper
         /// <param name="statementName">The name of the statement to execute.</param>
         /// <param name="parameterObject">The parameter object.</param>
         /// <returns>The number of rows effected.</returns>
-        int Update(string statementName, object parameterObject);
+        int Update(string statementName, object parameterObject, ISqlMapSession session);
 
 #if dotnet2
 
@@ -497,7 +497,7 @@ namespace IBatisNet.DataMapper
         /// <param name="valueProperty">The property of the result object to be used as the value (or null)</param>
         /// <returns>A IDictionary of object containing the rows keyed by keyProperty.</returns>
         ///<exception cref="DataMapperException">If a transaction is not in progress, or the database throws an exception.</exception>
-        IDictionary<K, V> QueryForDictionary<K, V>(string statementName, object parameterObject, string keyProperty, string valueProperty);
+        IDictionary<K, V> QueryForDictionary<K, V>(string statementName, object parameterObject, string keyProperty, string valueProperty, ISqlMapSession session);
 
         
         /// <summary>
@@ -508,7 +508,7 @@ namespace IBatisNet.DataMapper
         /// <param name="parameterObject">The object used to set the parameters in the SQL.</param>
         /// <param name="keyProperty">The property of the result object to be used as the key.</param>
         /// <returns>A IDictionary of object containing the rows keyed by keyProperty.</returns>
-        IDictionary<K, V> QueryForDictionary<K, V>(string statementName, object parameterObject, string keyProperty);
+        IDictionary<K, V> QueryForDictionary<K, V>(string statementName, object parameterObject, string keyProperty, ISqlMapSession session);
 
         /// <summary>
         /// Runs a query with a custom object that gets a chance to deal 
@@ -524,7 +524,7 @@ namespace IBatisNet.DataMapper
         /// <param name="rowDelegate">A delegate called once per row in the QueryForDictionary method></param>
         /// <returns>A IDictionary (Hashtable) of object containing the rows keyed by keyProperty.</returns>
         ///<exception cref="DataMapperException">If a transaction is not in progress, or the database throws an exception.</exception>
-        IDictionary<K, V> QueryForDictionary<K, V>(string statementName, object parameterObject, string keyProperty, string valueProperty, DictionaryRowDelegate<K, V> rowDelegate);
+        IDictionary<K, V> QueryForDictionary<K, V>(string statementName, object parameterObject, string keyProperty, string valueProperty, DictionaryRowDelegate<K, V> rowDelegate, ISqlMapSession session);
                 
         /// <summary>
         /// Executes a Sql SELECT statement that returns a single object of the type of the
@@ -534,7 +534,7 @@ namespace IBatisNet.DataMapper
         /// <param name="parameterObject">The object used to set the parameters in the SQL.</param>
         /// <param name="instanceObject">An object of the type to be returned.</param>
         /// <returns>The single result object populated with the result set data.</returns>
-        T QueryForObject<T>(string statementName, object parameterObject, T instanceObject);
+        T QueryForObject<T>(string statementName, object parameterObject, T instanceObject, ISqlMapSession session);
 
         /// <summary>
         /// Executes a Sql SELECT statement that returns that returns data 
@@ -546,7 +546,7 @@ namespace IBatisNet.DataMapper
         /// <param name="statementName">The name of the sql statement to execute.</param>
         /// <param name="parameterObject">The object used to set the parameters in the SQL.</param>
         /// <returns> The single result object populated with the result set data.</returns>
-        T QueryForObject<T>(string statementName, object parameterObject);
+        T QueryForObject<T>(string statementName, object parameterObject, ISqlMapSession session);
 
         /// <summary>
         /// Executes a Sql SELECT statement that returns data to populate
@@ -558,7 +558,7 @@ namespace IBatisNet.DataMapper
         /// <param name="statementName">The name of the sql statement to execute.</param>
         /// <param name="parameterObject">The object used to set the parameters in the SQL.</param>
         /// <returns>A List of result objects.</returns>
-        IList<T> QueryForList<T>(string statementName, object parameterObject);
+        IList<T> QueryForList<T>(string statementName, object parameterObject, ISqlMapSession session);
 
         /// <summary>
         /// Executes a Sql SELECT statement that returns data to populate
@@ -570,7 +570,7 @@ namespace IBatisNet.DataMapper
         /// <param name="statementName">The name of the sql statement to execute.</param>
         /// <param name="parameterObject">The object used to set the parameters in the SQL.</param>
         /// <param name="resultObject">An Ilist object used to hold the objects.</param>
-        void QueryForList<T>(string statementName, object parameterObject, IList<T> resultObject);
+        void QueryForList<T>(string statementName, object parameterObject, IList<T> resultObject, ISqlMapSession session);
 
         /// <summary>
         /// Executes the SQL and retuns all rows selected.
@@ -583,7 +583,7 @@ namespace IBatisNet.DataMapper
         /// <param name="skipResults">The number of rows to skip over.</param>
         /// <param name="maxResults">The maximum number of rows to return.</param>
         /// <returns>A List of result objects.</returns>
-        IList<T> QueryForList<T>(string statementName, object parameterObject, int skipResults, int maxResults);
+        IList<T> QueryForList<T>(string statementName, object parameterObject, int skipResults, int maxResults, ISqlMapSession session);
 
         /// <summary>
         /// Runs a query for list with a custom object that gets a chance to deal 
@@ -596,7 +596,7 @@ namespace IBatisNet.DataMapper
         /// <param name="parameterObject">The object used to set the parameters in the SQL.</param>
         /// <param name="rowDelegate"></param>
         /// <returns>A List of result objects.</returns>
-        IList<T> QueryWithRowDelegate<T>(string statementName, object parameterObject, RowDelegate<T> rowDelegate);
+        IList<T> QueryWithRowDelegate<T>(string statementName, object parameterObject, RowDelegate<T> rowDelegate, ISqlMapSession session);
         /// <summary>
         /// Executes the SQL and retuns all rows selected.
         /// <p/>
@@ -604,7 +604,7 @@ namespace IBatisNet.DataMapper
         /// <param name="statementName">Name of the statement.</param>
         /// <param name="parameterObject">The parameter object.</param>
         /// <returns></returns>
-        DataTable QueryForDataTable(string statementName, object parameterObject);
+        DataTable QueryForDataTable(string statementName, object parameterObject, ISqlMapSession session);
 
 
 #endif

@@ -50,20 +50,23 @@ namespace IBatisNet.DataMapper.MappedStatements
 		private IMappedStatement _mappedStatement = null;
 		private object _parameterObject = null;
 
-		#endregion
+        #endregion
 
-		/// <summary>
-		/// Constructor
-		/// </summary>
-		/// <param name="mappedStatement"></param>
-		/// <param name="parameterObject"></param>
-		/// <param name="pageSize"></param>
-		public PaginatedList(IMappedStatement mappedStatement, object parameterObject, int pageSize)
+        ISqlMapSession _session;
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="mappedStatement"></param>
+        /// <param name="parameterObject"></param>
+        /// <param name="pageSize"></param>
+        public PaginatedList(IMappedStatement mappedStatement, object parameterObject, int pageSize, ISqlMapSession session)
 		{
 			_mappedStatement = mappedStatement;
 			_parameterObject = parameterObject;
 			_pageSize = pageSize;
 			_index = 0;
+            _session = session;
 			PageTo(0);
 		}
 
@@ -201,31 +204,8 @@ namespace IBatisNet.DataMapper.MappedStatements
 		{
 			bool isSessionLocal = false;
 
-			ISqlMapSession session = _mappedStatement.SqlMap.LocalSession;
 
-			if (session == null) 
-			{
-				session = new SqlMapSession(_mappedStatement.SqlMap);
-				session.OpenConnection();
-				isSessionLocal = true;
-			}
-
-			IList list = null;
-			try 
-			{
-				list = _mappedStatement.ExecuteQueryForList(session, _parameterObject, (index) * _pageSize, localPageSize);
-			} 
-			catch
-			{
-				throw;
-			}
-			finally
-			{
-				if ( isSessionLocal )
-				{
-					session.CloseConnection();
-				}
-			}
+			IList list = _mappedStatement.ExecuteQueryForList(_session, _parameterObject, (index) * _pageSize, localPageSize);
 
 			return list;
 		}

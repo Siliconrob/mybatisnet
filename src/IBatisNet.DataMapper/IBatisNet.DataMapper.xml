@@ -5668,29 +5668,6 @@
             Name used to identify the the <see cref="T:IBatisNet.DataMapper.SqlMapper"/>
             </summary>
         </member>
-        <member name="P:IBatisNet.DataMapper.ISqlMapper.SessionStore">
-            <summary>
-            Allow to set a custom session store like the <see cref="T:IBatisNet.DataMapper.SessionStore.HybridWebThreadSessionStore"/>
-            </summary>
-            <remarks>Set it after the configuration and before use of the <see cref="T:IBatisNet.DataMapper.SqlMapper"/></remarks>
-            <example>
-            sqlMapper.SessionStore = new HybridWebThreadSessionStore( sqlMapper.Id );
-            </example>
-        </member>
-        <member name="P:IBatisNet.DataMapper.ISqlMapper.IsSessionStarted">
-            <summary>
-            Gets a value indicating whether this instance is session started.
-            </summary>
-            <value>
-            	<c>true</c> if this instance is session started; otherwise, <c>false</c>.
-            </value>
-        </member>
-        <member name="P:IBatisNet.DataMapper.ISqlMapper.LocalSession">
-            <summary>
-             Returns the DalSession instance 
-             currently being used by the SqlMap.
-            </summary>
-        </member>
         <member name="P:IBatisNet.DataMapper.ISqlMapper.DBHelperParameterCache">
             <summary>
             Gets the DB helper parameter cache.
@@ -5790,81 +5767,13 @@
             <param name="key"> The key name</param>
             <param name="mappedStatement">The statement to add</param>
         </member>
-        <member name="M:IBatisNet.DataMapper.ISqlMapper.BeginTransaction">
-            <summary>
-            Begins the transaction.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:IBatisNet.DataMapper.ISqlMapper.BeginTransaction(System.Boolean)">
-            <summary>
-            Begins the transaction.
-            </summary>
-            <param name="openConnection">if set to <c>true</c> [open connection].</param>
-            <returns></returns>
-        </member>
-        <member name="M:IBatisNet.DataMapper.ISqlMapper.BeginTransaction(System.String)">
-            <summary>
-            Begins the transaction.
-            </summary>
-            <param name="connectionString">The connection string.</param>
-            <returns></returns>
-        </member>
-        <member name="M:IBatisNet.DataMapper.ISqlMapper.BeginTransaction(System.Boolean,System.Data.IsolationLevel)">
-            <summary>
-            Begins the transaction.
-            </summary>
-            <param name="openNewConnection">if set to <c>true</c> [open new connection].</param>
-            <param name="isolationLevel">The isolation level.</param>
-            <returns></returns>
-        </member>
-        <member name="M:IBatisNet.DataMapper.ISqlMapper.BeginTransaction(System.String,System.Boolean,System.Data.IsolationLevel)">
-            <summary>
-            Begins the transaction.
-            </summary>
-            <param name="connectionString">The connection string.</param>
-            <param name="openNewConnection">if set to <c>true</c> [open new connection].</param>
-            <param name="isolationLevel">The isolation level.</param>
-            <returns></returns>
-        </member>
-        <member name="M:IBatisNet.DataMapper.ISqlMapper.BeginTransaction(System.Data.IsolationLevel)">
-            <summary>
-            Begins the transaction.
-            </summary>
-            <param name="isolationLevel">The isolation level.</param>
-            <returns></returns>
-        </member>
-        <member name="M:IBatisNet.DataMapper.ISqlMapper.BeginTransaction(System.String,System.Data.IsolationLevel)">
-            <summary>
-            Begins the transaction.
-            </summary>
-            <param name="connectionString">The connection string.</param>
-            <param name="isolationLevel">The isolation level.</param>
-            <returns></returns>
-        </member>
-        <member name="M:IBatisNet.DataMapper.ISqlMapper.CloseConnection">
-            <summary>
-            Closes the connection.
-            </summary>
-        </member>
-        <member name="M:IBatisNet.DataMapper.ISqlMapper.CommitTransaction(System.Boolean)">
-            <summary>
-            Commits the transaction.
-            </summary>
-            <param name="closeConnection">if set to <c>true</c> [close connection].</param>
-        </member>
-        <member name="M:IBatisNet.DataMapper.ISqlMapper.CommitTransaction">
-            <summary>
-            Commits the transaction.
-            </summary>
-        </member>
         <member name="P:IBatisNet.DataMapper.ISqlMapper.DataSource">
             <summary>
             Gets or sets the data source.
             </summary>
             <value>The data source.</value>
         </member>
-        <member name="M:IBatisNet.DataMapper.ISqlMapper.Delete(System.String,System.Object)">
+        <member name="M:IBatisNet.DataMapper.ISqlMapper.Delete(System.String,System.Object,IBatisNet.DataMapper.ISqlMapSession)">
             <summary>
              Executes a Sql DELETE statement.
              Delete returns the number of rows effected.
@@ -5891,7 +5800,7 @@
             <param name="id"> The id of the statement</param>
             <returns> The MappedStatement</returns>
         </member>
-        <member name="M:IBatisNet.DataMapper.ISqlMapper.Insert(System.String,System.Object)">
+        <member name="M:IBatisNet.DataMapper.ISqlMapper.Insert(System.String,System.Object,IBatisNet.DataMapper.ISqlMapSession)">
             <summary>
             Executes a Sql INSERT statement.
             Insert is a bit different from other update methods, as it
@@ -5909,20 +5818,7 @@
             or selected from a sequence table or other source.
             </returns>
         </member>
-        <member name="M:IBatisNet.DataMapper.ISqlMapper.OpenConnection">
-            <summary>
-            Opens the connection.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:IBatisNet.DataMapper.ISqlMapper.OpenConnection(System.String)">
-            <summary>
-            Opens the connection.
-            </summary>
-            <param name="connectionString">The connection string.</param>
-            <returns></returns>
-        </member>
-        <member name="M:IBatisNet.DataMapper.ISqlMapper.QueryForDictionary(System.String,System.Object,System.String,System.String)">
+        <member name="M:IBatisNet.DataMapper.ISqlMapper.QueryForDictionary(System.String,System.Object,System.String,System.String,IBatisNet.DataMapper.ISqlMapSession)">
              <summary>
              Alias to QueryForMap, .NET spirit.
               Feature idea by Ted Husted.
@@ -5934,7 +5830,7 @@
              <returns>A IDictionary (Hashtable) of object containing the rows keyed by keyProperty.</returns>
             <exception cref="T:IBatisNet.DataMapper.Exceptions.DataMapperException">If a transaction is not in progress, or the database throws an exception.</exception>
         </member>
-        <member name="M:IBatisNet.DataMapper.ISqlMapper.QueryForDictionary(System.String,System.Object,System.String)">
+        <member name="M:IBatisNet.DataMapper.ISqlMapper.QueryForDictionary(System.String,System.Object,System.String,IBatisNet.DataMapper.ISqlMapSession)">
             <summary>
              Alias to QueryForMap, .NET spirit.
              Feature idea by Ted Husted.
@@ -5944,7 +5840,7 @@
             <param name="keyProperty">The property of the result object to be used as the key.</param>
             <returns>A IDictionary (Hashtable) of object containing the rows keyed by keyProperty.</returns>
         </member>
-        <member name="M:IBatisNet.DataMapper.ISqlMapper.QueryForList(System.String,System.Object,System.Collections.IList)">
+        <member name="M:IBatisNet.DataMapper.ISqlMapper.QueryForList(System.String,System.Object,System.Collections.IList,IBatisNet.DataMapper.ISqlMapSession)">
             <summary>
             Executes a Sql SELECT statement that returns data to populate
             a number of result objects.
@@ -5957,7 +5853,7 @@
             <param name="resultObject">An Ilist object used to hold the objects.</param>
             <returns>A List of result objects.</returns>
         </member>
-        <member name="M:IBatisNet.DataMapper.ISqlMapper.QueryForList(System.String,System.Object)">
+        <member name="M:IBatisNet.DataMapper.ISqlMapper.QueryForList(System.String,System.Object,IBatisNet.DataMapper.ISqlMapSession)">
             <summary>
             Executes a Sql SELECT statement that returns data to populate
             a number of result objects.
@@ -5969,7 +5865,7 @@
             <param name="parameterObject">The object used to set the parameters in the SQL.</param>
             <returns>A List of result objects.</returns>
         </member>
-        <member name="M:IBatisNet.DataMapper.ISqlMapper.QueryForList(System.String,System.Object,System.Int32,System.Int32)">
+        <member name="M:IBatisNet.DataMapper.ISqlMapper.QueryForList(System.String,System.Object,System.Int32,System.Int32,IBatisNet.DataMapper.ISqlMapSession)">
             <summary>
             Executes the SQL and retuns all rows selected.
             <p/>
@@ -5982,7 +5878,7 @@
             <param name="maxResults">The maximum number of rows to return.</param>
             <returns>A List of result objects.</returns>
         </member>
-        <member name="M:IBatisNet.DataMapper.ISqlMapper.QueryForMap(System.String,System.Object,System.String)">
+        <member name="M:IBatisNet.DataMapper.ISqlMapper.QueryForMap(System.String,System.Object,System.String,IBatisNet.DataMapper.ISqlMapSession)">
             <summary>
              Executes the SQL and retuns all rows selected in a map that is keyed on the property named
              in the keyProperty parameter.  The value at each key will be the entire result object.
@@ -5992,7 +5888,7 @@
             <param name="keyProperty">The property of the result object to be used as the key.</param>
             <returns>A IDictionary (Hashtable) of object containing the rows keyed by keyProperty.</returns>
         </member>
-        <member name="M:IBatisNet.DataMapper.ISqlMapper.QueryForMap(System.String,System.Object,System.String,System.String)">
+        <member name="M:IBatisNet.DataMapper.ISqlMapper.QueryForMap(System.String,System.Object,System.String,System.String,IBatisNet.DataMapper.ISqlMapSession)">
              <summary>
              Executes the SQL and retuns all rows selected in a map that is keyed on the property named
              in the keyProperty parameter.  The value at each key will be the value of the property specified
@@ -6005,7 +5901,7 @@
              <returns>A IDictionary (Hashtable) of object containing the rows keyed by keyProperty.</returns>
             <exception cref="T:IBatisNet.DataMapper.Exceptions.DataMapperException">If a transaction is not in progress, or the database throws an exception.</exception>
         </member>
-        <member name="M:IBatisNet.DataMapper.ISqlMapper.QueryForMapWithRowDelegate(System.String,System.Object,System.String,System.String,IBatisNet.DataMapper.DictionaryRowDelegate)">
+        <member name="M:IBatisNet.DataMapper.ISqlMapper.QueryForMapWithRowDelegate(System.String,System.Object,System.String,System.String,IBatisNet.DataMapper.DictionaryRowDelegate,IBatisNet.DataMapper.ISqlMapSession)">
              <summary>
              Runs a query with a custom object that gets a chance to deal 
              with each row as it is processed.
@@ -6021,7 +5917,7 @@
              <returns>A IDictionary (Hashtable) of object containing the rows keyed by keyProperty.</returns>
             <exception cref="T:IBatisNet.DataMapper.Exceptions.DataMapperException">If a transaction is not in progress, or the database throws an exception.</exception>
         </member>
-        <member name="M:IBatisNet.DataMapper.ISqlMapper.QueryForObject(System.String,System.Object,System.Object)">
+        <member name="M:IBatisNet.DataMapper.ISqlMapper.QueryForObject(System.String,System.Object,System.Object,IBatisNet.DataMapper.ISqlMapSession)">
             <summary>
             Executes a Sql SELECT statement that returns a single object of the type of the
             resultObject parameter.
@@ -6031,7 +5927,7 @@
             <param name="resultObject">An object of the type to be returned.</param>
             <returns>The single result object populated with the result set data.</returns>
         </member>
-        <member name="M:IBatisNet.DataMapper.ISqlMapper.QueryForObject(System.String,System.Object)">
+        <member name="M:IBatisNet.DataMapper.ISqlMapper.QueryForObject(System.String,System.Object,IBatisNet.DataMapper.ISqlMapSession)">
             <summary>
             Executes a Sql SELECT statement that returns that returns data 
             to populate a single object instance.
@@ -6043,7 +5939,7 @@
             <param name="parameterObject">The object used to set the parameters in the SQL.</param>
             <returns> The single result object populated with the result set data.</returns>
         </member>
-        <member name="M:IBatisNet.DataMapper.ISqlMapper.QueryForPaginatedList(System.String,System.Object,System.Int32)">
+        <member name="M:IBatisNet.DataMapper.ISqlMapper.QueryForPaginatedList(System.String,System.Object,System.Int32,IBatisNet.DataMapper.ISqlMapSession)">
             <summary>
             Executes the SQL and retuns a subset of the results in a dynamic PaginatedList that can be used to
             automatically scroll through results from a database table.
@@ -6053,7 +5949,7 @@
             <param name="pageSize">The maximum number of objects to store in each page</param>
             <returns>A PaginatedList of beans containing the rows</returns>
         </member>
-        <member name="M:IBatisNet.DataMapper.ISqlMapper.QueryWithRowDelegate(System.String,System.Object,IBatisNet.DataMapper.RowDelegate)">
+        <member name="M:IBatisNet.DataMapper.ISqlMapper.QueryWithRowDelegate(System.String,System.Object,IBatisNet.DataMapper.RowDelegate,IBatisNet.DataMapper.ISqlMapSession)">
             <summary>
             Runs a query for list with a custom object that gets a chance to deal 
             with each row as it is processed.
@@ -6066,18 +5962,7 @@
             <param name="rowDelegate"></param>
             <returns>A List of result objects.</returns>
         </member>
-        <member name="M:IBatisNet.DataMapper.ISqlMapper.RollBackTransaction">
-            <summary>
-            Rolls the back transaction.
-            </summary>
-        </member>
-        <member name="M:IBatisNet.DataMapper.ISqlMapper.RollBackTransaction(System.Boolean)">
-            <summary>
-            Rolls the back transaction.
-            </summary>
-            <param name="closeConnection">if set to <c>true</c> [close connection].</param>
-        </member>
-        <member name="M:IBatisNet.DataMapper.ISqlMapper.Update(System.String,System.Object)">
+        <member name="M:IBatisNet.DataMapper.ISqlMapper.Update(System.String,System.Object,IBatisNet.DataMapper.ISqlMapSession)">
             <summary>
             Executes a Sql UPDATE statement.
             Update can also be used for any other update statement type,
@@ -6091,7 +5976,7 @@
             <param name="parameterObject">The parameter object.</param>
             <returns>The number of rows effected.</returns>
         </member>
-        <member name="M:IBatisNet.DataMapper.ISqlMapper.QueryForDictionary``2(System.String,System.Object,System.String,System.String)">
+        <member name="M:IBatisNet.DataMapper.ISqlMapper.QueryForDictionary``2(System.String,System.Object,System.String,System.String,IBatisNet.DataMapper.ISqlMapSession)">
              <summary>
              Executes the SQL and retuns all rows selected in a map that is keyed on the property named
              in the keyProperty parameter.  The value at each key will be the value of the property specified
@@ -6104,7 +5989,7 @@
              <returns>A IDictionary of object containing the rows keyed by keyProperty.</returns>
             <exception cref="T:IBatisNet.DataMapper.Exceptions.DataMapperException">If a transaction is not in progress, or the database throws an exception.</exception>
         </member>
-        <member name="M:IBatisNet.DataMapper.ISqlMapper.QueryForDictionary``2(System.String,System.Object,System.String)">
+        <member name="M:IBatisNet.DataMapper.ISqlMapper.QueryForDictionary``2(System.String,System.Object,System.String,IBatisNet.DataMapper.ISqlMapSession)">
             <summary>
              Executes the SQL and retuns all rows selected in a map that is keyed on the property named
              in the keyProperty parameter.  The value at each key will be the entire result object.
@@ -6114,7 +5999,7 @@
             <param name="keyProperty">The property of the result object to be used as the key.</param>
             <returns>A IDictionary of object containing the rows keyed by keyProperty.</returns>
         </member>
-        <member name="M:IBatisNet.DataMapper.ISqlMapper.QueryForDictionary``2(System.String,System.Object,System.String,System.String,IBatisNet.DataMapper.DictionaryRowDelegate{``0,``1})">
+        <member name="M:IBatisNet.DataMapper.ISqlMapper.QueryForDictionary``2(System.String,System.Object,System.String,System.String,IBatisNet.DataMapper.DictionaryRowDelegate{``0,``1},IBatisNet.DataMapper.ISqlMapSession)">
              <summary>
              Runs a query with a custom object that gets a chance to deal 
              with each row as it is processed.
@@ -6130,7 +6015,7 @@
              <returns>A IDictionary (Hashtable) of object containing the rows keyed by keyProperty.</returns>
             <exception cref="T:IBatisNet.DataMapper.Exceptions.DataMapperException">If a transaction is not in progress, or the database throws an exception.</exception>
         </member>
-        <member name="M:IBatisNet.DataMapper.ISqlMapper.QueryForObject``1(System.String,System.Object,``0)">
+        <member name="M:IBatisNet.DataMapper.ISqlMapper.QueryForObject``1(System.String,System.Object,``0,IBatisNet.DataMapper.ISqlMapSession)">
             <summary>
             Executes a Sql SELECT statement that returns a single object of the type of the
             resultObject parameter.
@@ -6140,7 +6025,7 @@
             <param name="instanceObject">An object of the type to be returned.</param>
             <returns>The single result object populated with the result set data.</returns>
         </member>
-        <member name="M:IBatisNet.DataMapper.ISqlMapper.QueryForObject``1(System.String,System.Object)">
+        <member name="M:IBatisNet.DataMapper.ISqlMapper.QueryForObject``1(System.String,System.Object,IBatisNet.DataMapper.ISqlMapSession)">
             <summary>
             Executes a Sql SELECT statement that returns that returns data 
             to populate a single object instance.
@@ -6152,7 +6037,7 @@
             <param name="parameterObject">The object used to set the parameters in the SQL.</param>
             <returns> The single result object populated with the result set data.</returns>
         </member>
-        <member name="M:IBatisNet.DataMapper.ISqlMapper.QueryForList``1(System.String,System.Object)">
+        <member name="M:IBatisNet.DataMapper.ISqlMapper.QueryForList``1(System.String,System.Object,IBatisNet.DataMapper.ISqlMapSession)">
             <summary>
             Executes a Sql SELECT statement that returns data to populate
             a number of result objects.
@@ -6164,7 +6049,7 @@
             <param name="parameterObject">The object used to set the parameters in the SQL.</param>
             <returns>A List of result objects.</returns>
         </member>
-        <member name="M:IBatisNet.DataMapper.ISqlMapper.QueryForList``1(System.String,System.Object,System.Collections.Generic.IList{``0})">
+        <member name="M:IBatisNet.DataMapper.ISqlMapper.QueryForList``1(System.String,System.Object,System.Collections.Generic.IList{``0},IBatisNet.DataMapper.ISqlMapSession)">
             <summary>
             Executes a Sql SELECT statement that returns data to populate
             a number of result objects.
@@ -6176,7 +6061,7 @@
             <param name="parameterObject">The object used to set the parameters in the SQL.</param>
             <param name="resultObject">An Ilist object used to hold the objects.</param>
         </member>
-        <member name="M:IBatisNet.DataMapper.ISqlMapper.QueryForList``1(System.String,System.Object,System.Int32,System.Int32)">
+        <member name="M:IBatisNet.DataMapper.ISqlMapper.QueryForList``1(System.String,System.Object,System.Int32,System.Int32,IBatisNet.DataMapper.ISqlMapSession)">
             <summary>
             Executes the SQL and retuns all rows selected.
             <p/>
@@ -6189,7 +6074,7 @@
             <param name="maxResults">The maximum number of rows to return.</param>
             <returns>A List of result objects.</returns>
         </member>
-        <member name="M:IBatisNet.DataMapper.ISqlMapper.QueryWithRowDelegate``1(System.String,System.Object,IBatisNet.DataMapper.RowDelegate{``0})">
+        <member name="M:IBatisNet.DataMapper.ISqlMapper.QueryWithRowDelegate``1(System.String,System.Object,IBatisNet.DataMapper.RowDelegate{``0},IBatisNet.DataMapper.ISqlMapSession)">
             <summary>
             Runs a query for list with a custom object that gets a chance to deal 
             with each row as it is processed.
@@ -6202,7 +6087,7 @@
             <param name="rowDelegate"></param>
             <returns>A List of result objects.</returns>
         </member>
-        <member name="M:IBatisNet.DataMapper.ISqlMapper.QueryForDataTable(System.String,System.Object)">
+        <member name="M:IBatisNet.DataMapper.ISqlMapper.QueryForDataTable(System.String,System.Object,IBatisNet.DataMapper.ISqlMapSession)">
             <summary>
             Executes the SQL and retuns all rows selected.
             <p/>
@@ -7105,17 +6990,6 @@
             <param name="resultObject">The result object.</param>
             <returns>The object</returns>
         </member>
-        <member name="M:IBatisNet.DataMapper.MappedStatements.MappedStatement.RunQueryForDynamicObject(IBatisNet.DataMapper.Scope.RequestScope,IBatisNet.DataMapper.ISqlMapSession,System.Object)">
-            <summary>
-            Executes an SQL statement that returns a single row as an Object of the type of
-            the resultObject passed in as a parameter.
-            </summary>
-            <param name="request">The request scope.</param>
-            <param name="session">The session used to execute the statement.</param>
-            <param name="parameterObject">The object used to set the parameters in the SQL.</param>
-            <param name="resultObject">The result object.</param>
-            <returns>The object</returns>
-        </member>
         <member name="M:IBatisNet.DataMapper.MappedStatements.MappedStatement.RunQueryForObject(IBatisNet.DataMapper.Scope.RequestScope,IBatisNet.DataMapper.ISqlMapSession,System.Object,System.Object)">
             <summary>
             Executes an SQL statement that returns a single row as an Object of the type of
@@ -7395,7 +7269,7 @@
             Summary description for PaginatedDataList.
             </summary>
         </member>
-        <member name="M:IBatisNet.DataMapper.MappedStatements.PaginatedList.#ctor(IBatisNet.DataMapper.MappedStatements.IMappedStatement,System.Object,System.Int32)">
+        <member name="M:IBatisNet.DataMapper.MappedStatements.PaginatedList.#ctor(IBatisNet.DataMapper.MappedStatements.IMappedStatement,System.Object,System.Int32,IBatisNet.DataMapper.ISqlMapSession)">
             <summary>
             Constructor
             </summary>
@@ -9453,20 +9327,6 @@
             sqlMapper.SessionStore = new HybridWebThreadSessionStore( sqlMapper.Id );
             </example>
         </member>
-        <member name="P:IBatisNet.DataMapper.SqlMapper.LocalSession">
-            <summary>
-             Returns the DalSession instance 
-             currently being used by the SqlMap.
-            </summary>
-        </member>
-        <member name="P:IBatisNet.DataMapper.SqlMapper.IsSessionStarted">
-            <summary>
-            Gets a value indicating whether this instance is session started.
-            </summary>
-            <value>
-            	<c>true</c> if this instance is session started; otherwise, <c>false</c>.
-            </value>
-        </member>
         <member name="P:IBatisNet.DataMapper.SqlMapper.DBHelperParameterCache">
             <summary>
             Gets the DB helper parameter cache.
@@ -9506,103 +9366,7 @@
             <param name="objectFactory">The object factory.</param>
             <param name="accessorFactory">The accessor factory.</param>
         </member>
-        <member name="M:IBatisNet.DataMapper.SqlMapper.OpenConnection">
-            <summary>
-            Open a connection
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:IBatisNet.DataMapper.SqlMapper.OpenConnection(System.String)">
-            <summary>
-            Open a connection, on the specified connection string.
-            </summary>
-            <param name="connectionString">The connection string</param>
-        </member>
-        <member name="M:IBatisNet.DataMapper.SqlMapper.CloseConnection">
-            <summary>
-            Open a connection
-            </summary>
-        </member>
-        <member name="M:IBatisNet.DataMapper.SqlMapper.BeginTransaction">
-            <summary>
-            Begins a database transaction.
-            </summary>
-        </member>
-        <member name="M:IBatisNet.DataMapper.SqlMapper.BeginTransaction(System.String)">
-            <summary>
-            Open a connection and begin a transaction on the specified connection string.
-            </summary>
-            <param name="connectionString">The connection string</param>
-        </member>
-        <member name="M:IBatisNet.DataMapper.SqlMapper.BeginTransaction(System.Boolean)">
-            <summary>
-            Begins a database transaction on the currect session
-            </summary>
-            <param name="openConnection">Open a connection.</param>
-        </member>
-        <member name="M:IBatisNet.DataMapper.SqlMapper.BeginTransaction(System.Data.IsolationLevel)">
-            <summary>
-            Begins a database transaction with the specified isolation level.
-            </summary>
-            <param name="isolationLevel">
-            The isolation level under which the transaction should run.
-            </param>
-        </member>
-        <member name="M:IBatisNet.DataMapper.SqlMapper.BeginTransaction(System.String,System.Data.IsolationLevel)">
-            <summary>
-            Open a connection and begin a transaction on the specified connection string.
-            </summary>
-            <param name="connectionString">The connection string</param>
-            <param name="isolationLevel">The transaction isolation level for this connection.</param>
-        </member>
-        <member name="M:IBatisNet.DataMapper.SqlMapper.BeginTransaction(System.Boolean,System.Data.IsolationLevel)">
-            <summary>
-            Start a database transaction on the current session
-            with the specified isolation level.
-            </summary>
-            <param name="openNewConnection">Open a connection.</param>
-            <param name="isolationLevel">
-            The isolation level under which the transaction should run.
-            </param>
-        </member>
-        <member name="M:IBatisNet.DataMapper.SqlMapper.BeginTransaction(System.String,System.Boolean,System.Data.IsolationLevel)">
-            <summary>
-            Begins a transaction on the current connection
-            with the specified IsolationLevel value.
-            </summary>
-            <param name="isolationLevel">The transaction isolation level for this connection.</param>
-            <param name="connectionString">The connection string</param>
-            <param name="openNewConnection">Open a connection.</param>
-        </member>
-        <member name="M:IBatisNet.DataMapper.SqlMapper.CommitTransaction">
-            <summary>
-            Commits the database transaction.
-            </summary>
-            <remarks>
-            Will close the connection.
-            </remarks>
-        </member>
-        <member name="M:IBatisNet.DataMapper.SqlMapper.CommitTransaction(System.Boolean)">
-            <summary>
-            Commits the database transaction.
-            </summary>
-            <param name="closeConnection">Close the connection</param>
-        </member>
-        <member name="M:IBatisNet.DataMapper.SqlMapper.RollBackTransaction">
-            <summary>
-            Rolls back a transaction from a pending state.
-            </summary>
-            <remarks>
-            Will close the connection.
-            </remarks>
-        </member>
-        <member name="M:IBatisNet.DataMapper.SqlMapper.RollBackTransaction(System.Boolean)">
-            <summary>
-            Rolls back a transaction from a pending state.
-            </summary>
-            <param name="closeConnection">Close the connection</param>
-        </member>
-        <member name="M:IBatisNet.DataMapper.SqlMapper.QueryForObject(System.String,System.Object)">
+        <member name="M:IBatisNet.DataMapper.SqlMapper.QueryForObject(System.String,System.Object,IBatisNet.DataMapper.ISqlMapSession)">
             <summary>
             Executes a Sql SELECT statement that returns that returns data 
             to populate a single object instance.
@@ -9614,7 +9378,7 @@
             <param name="parameterObject">The object used to set the parameters in the SQL.</param>
             <returns> The single result object populated with the result set data.</returns>
         </member>
-        <member name="M:IBatisNet.DataMapper.SqlMapper.QueryForObject(System.String,System.Object,System.Object)">
+        <member name="M:IBatisNet.DataMapper.SqlMapper.QueryForObject(System.String,System.Object,System.Object,IBatisNet.DataMapper.ISqlMapSession)">
             <summary>
             Executes a Sql SELECT statement that returns a single object of the type of the
             resultObject parameter.
@@ -9624,7 +9388,7 @@
             <param name="resultObject">An object of the type to be returned.</param>
             <returns>The single result object populated with the result set data.</returns>
         </member>
-        <member name="M:IBatisNet.DataMapper.SqlMapper.QueryForObject``1(System.String,System.Object)">
+        <member name="M:IBatisNet.DataMapper.SqlMapper.QueryForObject``1(System.String,System.Object,IBatisNet.DataMapper.ISqlMapSession)">
             <summary>
             Executes a Sql SELECT statement that returns that returns data 
             to populate a single object instance.
@@ -9636,7 +9400,7 @@
             <param name="parameterObject">The object used to set the parameters in the SQL.</param>
             <returns> The single result object populated with the result set data.</returns>
         </member>
-        <member name="M:IBatisNet.DataMapper.SqlMapper.QueryForObject``1(System.String,System.Object,``0)">
+        <member name="M:IBatisNet.DataMapper.SqlMapper.QueryForObject``1(System.String,System.Object,``0,IBatisNet.DataMapper.ISqlMapSession)">
             <summary>
             Executes a Sql SELECT statement that returns a single object of the type of the
             resultObject parameter.
@@ -9646,7 +9410,7 @@
             <param name="instanceObject">An object of the type to be returned.</param>
             <returns>The single result object populated with the result set data.</returns>
         </member>
-        <member name="M:IBatisNet.DataMapper.SqlMapper.QueryForDictionary(System.String,System.Object,System.String)">
+        <member name="M:IBatisNet.DataMapper.SqlMapper.QueryForDictionary(System.String,System.Object,System.String,IBatisNet.DataMapper.ISqlMapSession)">
             <summary>
              Alias to QueryForMap, .NET spirit.
              Feature idea by Ted Husted.
@@ -9656,7 +9420,7 @@
             <param name="keyProperty">The property of the result object to be used as the key.</param>
             <returns>A IDictionary (Hashtable) of object containing the rows keyed by keyProperty.</returns>
         </member>
-        <member name="M:IBatisNet.DataMapper.SqlMapper.QueryForDictionary(System.String,System.Object,System.String,System.String)">
+        <member name="M:IBatisNet.DataMapper.SqlMapper.QueryForDictionary(System.String,System.Object,System.String,System.String,IBatisNet.DataMapper.ISqlMapSession)">
              <summary>
              Alias to QueryForMap, .NET spirit.
               Feature idea by Ted Husted.
@@ -9668,7 +9432,7 @@
              <returns>A IDictionary (Hashtable) of object containing the rows keyed by keyProperty.</returns>
             <exception cref="T:IBatisNet.DataMapper.Exceptions.DataMapperException">If a transaction is not in progress, or the database throws an exception.</exception>
         </member>
-        <member name="M:IBatisNet.DataMapper.SqlMapper.QueryForMap(System.String,System.Object,System.String)">
+        <member name="M:IBatisNet.DataMapper.SqlMapper.QueryForMap(System.String,System.Object,System.String,IBatisNet.DataMapper.ISqlMapSession)">
             <summary>
              Executes the SQL and retuns all rows selected in a map that is keyed on the property named
              in the keyProperty parameter.  The value at each key will be the entire result object.
@@ -9678,7 +9442,7 @@
             <param name="keyProperty">The property of the result object to be used as the key.</param>
             <returns>A IDictionary (Hashtable) of object containing the rows keyed by keyProperty.</returns>
         </member>
-        <member name="M:IBatisNet.DataMapper.SqlMapper.QueryForMap(System.String,System.Object,System.String,System.String)">
+        <member name="M:IBatisNet.DataMapper.SqlMapper.QueryForMap(System.String,System.Object,System.String,System.String,IBatisNet.DataMapper.ISqlMapSession)">
              <summary>
              Executes the SQL and retuns all rows selected in a map that is keyed on the property named
              in the keyProperty parameter.  The value at each key will be the value of the property specified
@@ -9691,7 +9455,7 @@
              <returns>A IDictionary (Hashtable) of object containing the rows keyed by keyProperty.</returns>
             <exception cref="T:IBatisNet.DataMapper.Exceptions.DataMapperException">If a transaction is not in progress, or the database throws an exception.</exception>
         </member>
-        <member name="M:IBatisNet.DataMapper.SqlMapper.QueryForList(System.String,System.Object)">
+        <member name="M:IBatisNet.DataMapper.SqlMapper.QueryForList(System.String,System.Object,IBatisNet.DataMapper.ISqlMapSession)">
             <summary>
             Executes a Sql SELECT statement that returns data to populate
             a number of result objects.
@@ -9703,7 +9467,7 @@
             <param name="parameterObject">The object used to set the parameters in the SQL.</param>
             <returns>A List of result objects.</returns>
         </member>
-        <member name="M:IBatisNet.DataMapper.SqlMapper.QueryForList(System.String,System.Object,System.Int32,System.Int32)">
+        <member name="M:IBatisNet.DataMapper.SqlMapper.QueryForList(System.String,System.Object,System.Int32,System.Int32,IBatisNet.DataMapper.ISqlMapSession)">
             <summary>
             Executes the SQL and retuns all rows selected.
             <p/>
@@ -9716,7 +9480,7 @@
             <param name="maxResults">The maximum number of rows to return.</param>
             <returns>A List of result objects.</returns>
         </member>
-        <member name="M:IBatisNet.DataMapper.SqlMapper.QueryForList(System.String,System.Object,System.Collections.IList)">
+        <member name="M:IBatisNet.DataMapper.SqlMapper.QueryForList(System.String,System.Object,System.Collections.IList,IBatisNet.DataMapper.ISqlMapSession)">
             <summary>
             Executes a Sql SELECT statement that returns data to populate
             a number of result objects.
@@ -9729,7 +9493,7 @@
             <param name="resultObject">An Ilist object used to hold the objects.</param>
             <returns>A List of result objects.</returns>
         </member>
-        <member name="M:IBatisNet.DataMapper.SqlMapper.QueryForDictionary``2(System.String,System.Object,System.String,System.String)">
+        <member name="M:IBatisNet.DataMapper.SqlMapper.QueryForDictionary``2(System.String,System.Object,System.String,System.String,IBatisNet.DataMapper.ISqlMapSession)">
              <summary>
              Executes the SQL and retuns all rows selected in a map that is keyed on the property named
              in the keyProperty parameter.  The value at each key will be the value of the property specified
@@ -9742,7 +9506,7 @@
              <returns>A IDictionary of object containing the rows keyed by keyProperty.</returns>
             <exception cref="T:IBatisNet.DataMapper.Exceptions.DataMapperException">If a transaction is not in progress, or the database throws an exception.</exception>
         </member>
-        <member name="M:IBatisNet.DataMapper.SqlMapper.QueryForDictionary``2(System.String,System.Object,System.String)">
+        <member name="M:IBatisNet.DataMapper.SqlMapper.QueryForDictionary``2(System.String,System.Object,System.String,IBatisNet.DataMapper.ISqlMapSession)">
             <summary>
              Executes the SQL and retuns all rows selected in a map that is keyed on the property named
              in the keyProperty parameter.  The value at each key will be the entire result object.
@@ -9752,7 +9516,7 @@
             <param name="keyProperty">The property of the result object to be used as the key.</param>
             <returns>A IDictionary of object containing the rows keyed by keyProperty.</returns>
         </member>
-        <member name="M:IBatisNet.DataMapper.SqlMapper.QueryForDictionary``2(System.String,System.Object,System.String,System.String,IBatisNet.DataMapper.DictionaryRowDelegate{``0,``1})">
+        <member name="M:IBatisNet.DataMapper.SqlMapper.QueryForDictionary``2(System.String,System.Object,System.String,System.String,IBatisNet.DataMapper.DictionaryRowDelegate{``0,``1},IBatisNet.DataMapper.ISqlMapSession)">
              <summary>
              Runs a query with a custom object that gets a chance to deal 
              with each row as it is processed.
@@ -9768,7 +9532,7 @@
              <returns>A IDictionary (Hashtable) of object containing the rows keyed by keyProperty.</returns>
             <exception cref="T:IBatisNet.DataMapper.Exceptions.DataMapperException">If a transaction is not in progress, or the database throws an exception.</exception>
         </member>
-        <member name="M:IBatisNet.DataMapper.SqlMapper.QueryForList``1(System.String,System.Object)">
+        <member name="M:IBatisNet.DataMapper.SqlMapper.QueryForList``1(System.String,System.Object,IBatisNet.DataMapper.ISqlMapSession)">
             <summary>
             Executes a Sql SELECT statement that returns data to populate
             a number of result objects.
@@ -9780,7 +9544,7 @@
             <param name="parameterObject">The object used to set the parameters in the SQL.</param>
             <returns>A List of result objects.</returns>
         </member>
-        <member name="M:IBatisNet.DataMapper.SqlMapper.QueryForList``1(System.String,System.Object,System.Int32,System.Int32)">
+        <member name="M:IBatisNet.DataMapper.SqlMapper.QueryForList``1(System.String,System.Object,System.Int32,System.Int32,IBatisNet.DataMapper.ISqlMapSession)">
             <summary>
             Executes the SQL and retuns all rows selected.
             <p/>
@@ -9793,7 +9557,7 @@
             <param name="maxResults">The maximum number of rows to return.</param>
             <returns>A List of result objects.</returns>
         </member>
-        <member name="M:IBatisNet.DataMapper.SqlMapper.QueryForList``1(System.String,System.Object,System.Collections.Generic.IList{``0})">
+        <member name="M:IBatisNet.DataMapper.SqlMapper.QueryForList``1(System.String,System.Object,System.Collections.Generic.IList{``0},IBatisNet.DataMapper.ISqlMapSession)">
             <summary>
             Executes a Sql SELECT statement that returns data to populate
             a number of result objects.
@@ -9805,7 +9569,7 @@
             <param name="parameterObject">The object used to set the parameters in the SQL.</param>
             <param name="resultObject">An Ilist object used to hold the objects.</param>
         </member>
-        <member name="M:IBatisNet.DataMapper.SqlMapper.QueryForDataTable(System.String,System.Object)">
+        <member name="M:IBatisNet.DataMapper.SqlMapper.QueryForDataTable(System.String,System.Object,IBatisNet.DataMapper.ISqlMapSession)">
             <summary>
             Executes the SQL and retuns all rows selected.
             <p/>
@@ -9814,7 +9578,7 @@
             <param name="parameterObject">The parameter object.</param>
             <returns></returns>
         </member>
-        <member name="M:IBatisNet.DataMapper.SqlMapper.QueryForPaginatedList(System.String,System.Object,System.Int32)">
+        <member name="M:IBatisNet.DataMapper.SqlMapper.QueryForPaginatedList(System.String,System.Object,System.Int32,IBatisNet.DataMapper.ISqlMapSession)">
             <summary>
             Executes the SQL and retuns a subset of the results in a dynamic PaginatedList that can be used to
             automatically scroll through results from a database table.
@@ -9824,7 +9588,7 @@
             <param name="pageSize">The maximum number of objects to store in each page</param>
             <returns>A PaginatedList of beans containing the rows</returns>
         </member>
-        <member name="M:IBatisNet.DataMapper.SqlMapper.QueryWithRowDelegate(System.String,System.Object,IBatisNet.DataMapper.RowDelegate)">
+        <member name="M:IBatisNet.DataMapper.SqlMapper.QueryWithRowDelegate(System.String,System.Object,IBatisNet.DataMapper.RowDelegate,IBatisNet.DataMapper.ISqlMapSession)">
             <summary>
             Runs a query for list with a custom object that gets a chance to deal 
             with each row as it is processed.
@@ -9837,7 +9601,7 @@
             <param name="rowDelegate"></param>
             <returns>A List of result objects.</returns>
         </member>
-        <member name="M:IBatisNet.DataMapper.SqlMapper.QueryWithRowDelegate``1(System.String,System.Object,IBatisNet.DataMapper.RowDelegate{``0})">
+        <member name="M:IBatisNet.DataMapper.SqlMapper.QueryWithRowDelegate``1(System.String,System.Object,IBatisNet.DataMapper.RowDelegate{``0},IBatisNet.DataMapper.ISqlMapSession)">
             <summary>
             Runs a query for list with a custom object that gets a chance to deal 
             with each row as it is processed.
@@ -9850,7 +9614,7 @@
             <param name="rowDelegate"></param>
             <returns>A List of result objects.</returns>
         </member>
-        <member name="M:IBatisNet.DataMapper.SqlMapper.QueryForMapWithRowDelegate(System.String,System.Object,System.String,System.String,IBatisNet.DataMapper.DictionaryRowDelegate)">
+        <member name="M:IBatisNet.DataMapper.SqlMapper.QueryForMapWithRowDelegate(System.String,System.Object,System.String,System.String,IBatisNet.DataMapper.DictionaryRowDelegate,IBatisNet.DataMapper.ISqlMapSession)">
              <summary>
              Runs a query with a custom object that gets a chance to deal 
              with each row as it is processed.
@@ -9866,7 +9630,7 @@
              <returns>A IDictionary (Hashtable) of object containing the rows keyed by keyProperty.</returns>
             <exception cref="T:IBatisNet.DataMapper.Exceptions.DataMapperException">If a transaction is not in progress, or the database throws an exception.</exception>
         </member>
-        <member name="M:IBatisNet.DataMapper.SqlMapper.Insert(System.String,System.Object)">
+        <member name="M:IBatisNet.DataMapper.SqlMapper.Insert(System.String,System.Object,IBatisNet.DataMapper.ISqlMapSession)">
             <summary>
             Executes a Sql INSERT statement.
             Insert is a bit different from other update methods, as it
@@ -9884,7 +9648,7 @@
             or selected from a sequence table or other source.
             </returns>
         </member>
-        <member name="M:IBatisNet.DataMapper.SqlMapper.Update(System.String,System.Object)">
+        <member name="M:IBatisNet.DataMapper.SqlMapper.Update(System.String,System.Object,IBatisNet.DataMapper.ISqlMapSession)">
             <summary>
             Executes a Sql UPDATE statement.
             Update can also be used for any other update statement type,
@@ -9898,7 +9662,7 @@
             <param name="parameterObject">The parameter object.</param>
             <returns>The number of rows effected.</returns>
         </member>
-        <member name="M:IBatisNet.DataMapper.SqlMapper.Delete(System.String,System.Object)">
+        <member name="M:IBatisNet.DataMapper.SqlMapper.Delete(System.String,System.Object,IBatisNet.DataMapper.ISqlMapSession)">
             <summary>
              Executes a Sql DELETE statement.
              Delete returns the number of rows effected.

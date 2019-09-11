@@ -545,21 +545,21 @@ namespace IBatisNet.DataMapper
 			{
 				if (_connection.State != ConnectionState.Closed)
 				{
-					_sqlMapper.CloseConnection();
+					CloseConnection();
 				}
 			}
 			else
 			{
 				if (_consistent)
 				{
-					_sqlMapper.CommitTransaction();
+					CommitTransaction();
                     _isTransactionOpen = false;
 				}
 				else
 				{
 					if (_connection.State != ConnectionState.Closed)
 					{
-						_sqlMapper.RollBackTransaction();
+						RollBackTransaction();
                         _isTransactionOpen = false;
 					}
 				}

@@ -114,13 +114,15 @@ namespace IBatisNet.DataMapper.Proxy
                     }
 
                     //Perform load
+                    throw new InvalidOperationException("todo: find session");
+
                     if (typeof(IList).IsAssignableFrom(setAccessor.MemberType))
                     {
-                        lazyLoadedItem = sqlMapper.QueryForList(statementName, param);
+                        lazyLoadedItem = sqlMapper.QueryForList(statementName, param, null);
                     }
                     else
                     {
-                        lazyLoadedItem = sqlMapper.QueryForObject(statementName, param);
+                        lazyLoadedItem = sqlMapper.QueryForObject(statementName, param, null);
                     }
 
                     loaded = true;

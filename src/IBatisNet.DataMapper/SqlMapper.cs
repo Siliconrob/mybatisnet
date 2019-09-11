@@ -110,21 +110,21 @@ namespace IBatisNet.DataMapper
 		///  Returns the DalSession instance 
 		///  currently being used by the SqlMap.
 		/// </summary>
-		public ISqlMapSession LocalSession
-		{
-			get { return _sessionStore.LocalSession; }
-		}
+		//public ISqlMapSession LocalSession
+		//{
+		//	get { return _sessionStore.LocalSession; }
+		//}
 
-        /// <summary>
-        /// Gets a value indicating whether this instance is session started.
-        /// </summary>
-        /// <value>
-        /// 	<c>true</c> if this instance is session started; otherwise, <c>false</c>.
-        /// </value>
-		public bool IsSessionStarted
-		{
-			get { return (_sessionStore.LocalSession != null); }
-		}
+  //      /// <summary>
+  //      /// Gets a value indicating whether this instance is session started.
+  //      /// </summary>
+  //      /// <value>
+  //      /// 	<c>true</c> if this instance is session started; otherwise, <c>false</c>.
+  //      /// </value>
+		//public bool IsSessionStarted
+		//{
+		//	get { return (_sessionStore.LocalSession != null); }
+		//}
 
         /// <summary>
         /// Gets the DB helper parameter cache.
@@ -205,300 +205,300 @@ namespace IBatisNet.DataMapper
 
 		#region Manage Connection, Transaction
 		
-		/// <summary>
-		/// Open a connection
-		/// </summary>
-		/// <returns></returns>
-		public ISqlMapSession OpenConnection() 
-		{
-			if (_sessionStore.LocalSession != null) 
-			{
-				throw new DataMapperException("SqlMap could not invoke OpenConnection(). A connection is already started. Call CloseConnection first.");
-			}
-            ISqlMapSession session = CreateSqlMapSession();
-			_sessionStore.Store(session);
-			return session;
-		}
+		///// <summary>
+		///// Open a connection
+		///// </summary>
+		///// <returns></returns>
+		//public ISqlMapSession OpenConnection() 
+		//{
+		//	if (_sessionStore.LocalSession != null) 
+		//	{
+		//		throw new DataMapperException("SqlMap could not invoke OpenConnection(). A connection is already started. Call CloseConnection first.");
+		//	}
+  //          ISqlMapSession session = CreateSqlMapSession();
+		//	_sessionStore.Store(session);
+		//	return session;
+		//}
 
-		/// <summary>
-		/// Open a connection, on the specified connection string.
-		/// </summary>
-		/// <param name="connectionString">The connection string</param>
-		public ISqlMapSession OpenConnection(string connectionString)
-		{
-			if (_sessionStore.LocalSession != null) 
-			{
-				throw new DataMapperException("SqlMap could not invoke OpenConnection(). A connection is already started. Call CloseConnection first.");
-			}
-            ISqlMapSession session = CreateSqlMapSession(connectionString);
-			_sessionStore.Store(session);
-			return session;
-		}
+		///// <summary>
+		///// Open a connection, on the specified connection string.
+		///// </summary>
+		///// <param name="connectionString">The connection string</param>
+		//public ISqlMapSession OpenConnection(string connectionString)
+		//{
+		//	if (_sessionStore.LocalSession != null) 
+		//	{
+		//		throw new DataMapperException("SqlMap could not invoke OpenConnection(). A connection is already started. Call CloseConnection first.");
+		//	}
+  //          ISqlMapSession session = CreateSqlMapSession(connectionString);
+		//	_sessionStore.Store(session);
+		//	return session;
+		//}
 
-		/// <summary>
-		/// Open a connection
-		/// </summary>
-		public void CloseConnection()
-		{
-			if (_sessionStore.LocalSession == null) 
-			{
-				throw new DataMapperException("SqlMap could not invoke CloseConnection(). No connection was started. Call OpenConnection() first.");
-			}
-			try
-			{
-				ISqlMapSession session = _sessionStore.LocalSession;
-				session.CloseConnection();			
-			} 
-			catch(Exception ex)
-			{
-				throw new DataMapperException("SqlMapper could not CloseConnection(). Cause :"+ex.Message, ex);
-			}
-			finally 
-			{
-				_sessionStore.Dispose();
-			}
-		}
+		///// <summary>
+		///// Open a connection
+		///// </summary>
+		//public void CloseConnection()
+		//{
+		//	if (_sessionStore.LocalSession == null) 
+		//	{
+		//		throw new DataMapperException("SqlMap could not invoke CloseConnection(). No connection was started. Call OpenConnection() first.");
+		//	}
+		//	try
+		//	{
+		//		ISqlMapSession session = _sessionStore.LocalSession;
+		//		session.CloseConnection();			
+		//	} 
+		//	catch(Exception ex)
+		//	{
+		//		throw new DataMapperException("SqlMapper could not CloseConnection(). Cause :"+ex.Message, ex);
+		//	}
+		//	finally 
+		//	{
+		//		_sessionStore.Dispose();
+		//	}
+		//}
 
 
-		/// <summary>
-		/// Begins a database transaction.
-		/// </summary>
-		public ISqlMapSession BeginTransaction() 
-		{
-			if (_sessionStore.LocalSession != null) 
-			{
-				throw new DataMapperException("SqlMap could not invoke BeginTransaction(). A Transaction is already started. Call CommitTransaction() or RollbackTransaction first.");
-			}
-            ISqlMapSession session = CreateSqlMapSession();
-			_sessionStore.Store(session);
-			session.BeginTransaction();
-			return session ;
-		}
+		///// <summary>
+		///// Begins a database transaction.
+		///// </summary>
+		//public ISqlMapSession BeginTransaction() 
+		//{
+		//	if (_sessionStore.LocalSession != null) 
+		//	{
+		//		throw new DataMapperException("SqlMap could not invoke BeginTransaction(). A Transaction is already started. Call CommitTransaction() or RollbackTransaction first.");
+		//	}
+  //          ISqlMapSession session = CreateSqlMapSession();
+		//	_sessionStore.Store(session);
+		//	session.BeginTransaction();
+		//	return session ;
+		//}
 
-		/// <summary>
-		/// Open a connection and begin a transaction on the specified connection string.
-		/// </summary>
-		/// <param name="connectionString">The connection string</param>
-		public ISqlMapSession BeginTransaction(string connectionString)
-		{
-			if (_sessionStore.LocalSession != null) 
-			{
-				throw new DataMapperException("SqlMap could not invoke BeginTransaction(). A Transaction is already started. Call CommitTransaction() or RollbackTransaction first.");
-			}
-            ISqlMapSession session = CreateSqlMapSession(connectionString);
-			_sessionStore.Store(session);
-			session.BeginTransaction( connectionString );
-			return session ;
-		}
+		///// <summary>
+		///// Open a connection and begin a transaction on the specified connection string.
+		///// </summary>
+		///// <param name="connectionString">The connection string</param>
+		//public ISqlMapSession BeginTransaction(string connectionString)
+		//{
+		//	if (_sessionStore.LocalSession != null) 
+		//	{
+		//		throw new DataMapperException("SqlMap could not invoke BeginTransaction(). A Transaction is already started. Call CommitTransaction() or RollbackTransaction first.");
+		//	}
+  //          ISqlMapSession session = CreateSqlMapSession(connectionString);
+		//	_sessionStore.Store(session);
+		//	session.BeginTransaction( connectionString );
+		//	return session ;
+		//}
 
-		/// <summary>
-		/// Begins a database transaction on the currect session
-		/// </summary>
-		/// <param name="openConnection">Open a connection.</param>
-		public ISqlMapSession BeginTransaction(bool openConnection)
-		{
-			ISqlMapSession session = null;
+		///// <summary>
+		///// Begins a database transaction on the currect session
+		///// </summary>
+		///// <param name="openConnection">Open a connection.</param>
+		//public ISqlMapSession BeginTransaction(bool openConnection)
+		//{
+		//	ISqlMapSession session = null;
 
-			if (openConnection)
-			{
-				session = this.BeginTransaction();
-			}
-			else
-			{
-				session = _sessionStore.LocalSession;
-				if (session == null) 
-				{
-					throw new DataMapperException("SqlMap could not invoke BeginTransaction(). A session must be Open. Call OpenConnection() first.");
-				}
-				session.BeginTransaction(openConnection);
-			}
+		//	if (openConnection)
+		//	{
+		//		session = this.BeginTransaction();
+		//	}
+		//	else
+		//	{
+		//		session = _sessionStore.LocalSession;
+		//		if (session == null) 
+		//		{
+		//			throw new DataMapperException("SqlMap could not invoke BeginTransaction(). A session must be Open. Call OpenConnection() first.");
+		//		}
+		//		session.BeginTransaction(openConnection);
+		//	}
 
-			return session;
-		}
+		//	return session;
+		//}
 
-		/// <summary>
-		/// Begins a database transaction with the specified isolation level.
-		/// </summary>
-		/// <param name="isolationLevel">
-		/// The isolation level under which the transaction should run.
-		/// </param>
-		public ISqlMapSession BeginTransaction(IsolationLevel isolationLevel)
-		{
-			if (_sessionStore.LocalSession != null) 
-			{
-				throw new DataMapperException("SqlMap could not invoke BeginTransaction(). A Transaction is already started. Call CommitTransaction() or RollbackTransaction first.");
-			}
-            ISqlMapSession session = CreateSqlMapSession();
-			_sessionStore.Store(session);
-			session.BeginTransaction(isolationLevel);
-			return session;
-		}
+		///// <summary>
+		///// Begins a database transaction with the specified isolation level.
+		///// </summary>
+		///// <param name="isolationLevel">
+		///// The isolation level under which the transaction should run.
+		///// </param>
+		//public ISqlMapSession BeginTransaction(IsolationLevel isolationLevel)
+		//{
+		//	if (_sessionStore.LocalSession != null) 
+		//	{
+		//		throw new DataMapperException("SqlMap could not invoke BeginTransaction(). A Transaction is already started. Call CommitTransaction() or RollbackTransaction first.");
+		//	}
+  //          ISqlMapSession session = CreateSqlMapSession();
+		//	_sessionStore.Store(session);
+		//	session.BeginTransaction(isolationLevel);
+		//	return session;
+		//}
 
-		/// <summary>
-		/// Open a connection and begin a transaction on the specified connection string.
-		/// </summary>
-		/// <param name="connectionString">The connection string</param>
-		/// <param name="isolationLevel">The transaction isolation level for this connection.</param>
-		public ISqlMapSession BeginTransaction(string connectionString, IsolationLevel isolationLevel)
-		{
-			if (_sessionStore.LocalSession != null) 
-			{
-				throw new DataMapperException("SqlMap could not invoke BeginTransaction(). A Transaction is already started. Call CommitTransaction() or RollbackTransaction first.");
-			}
-            ISqlMapSession session = CreateSqlMapSession(connectionString);
-			_sessionStore.Store(session);
-			session.BeginTransaction( connectionString, isolationLevel);
-			return session;
-		}
+		///// <summary>
+		///// Open a connection and begin a transaction on the specified connection string.
+		///// </summary>
+		///// <param name="connectionString">The connection string</param>
+		///// <param name="isolationLevel">The transaction isolation level for this connection.</param>
+		//public ISqlMapSession BeginTransaction(string connectionString, IsolationLevel isolationLevel)
+		//{
+		//	if (_sessionStore.LocalSession != null) 
+		//	{
+		//		throw new DataMapperException("SqlMap could not invoke BeginTransaction(). A Transaction is already started. Call CommitTransaction() or RollbackTransaction first.");
+		//	}
+  //          ISqlMapSession session = CreateSqlMapSession(connectionString);
+		//	_sessionStore.Store(session);
+		//	session.BeginTransaction( connectionString, isolationLevel);
+		//	return session;
+		//}
 
-		/// <summary>
-		/// Start a database transaction on the current session
-		/// with the specified isolation level.
-		/// </summary>
-		/// <param name="openNewConnection">Open a connection.</param>
-		/// <param name="isolationLevel">
-		/// The isolation level under which the transaction should run.
-		/// </param>
-		public ISqlMapSession BeginTransaction(bool openNewConnection, IsolationLevel isolationLevel)
-		{
-			ISqlMapSession session = null;
+		///// <summary>
+		///// Start a database transaction on the current session
+		///// with the specified isolation level.
+		///// </summary>
+		///// <param name="openNewConnection">Open a connection.</param>
+		///// <param name="isolationLevel">
+		///// The isolation level under which the transaction should run.
+		///// </param>
+		//public ISqlMapSession BeginTransaction(bool openNewConnection, IsolationLevel isolationLevel)
+		//{
+		//	ISqlMapSession session = null;
 
-			if (openNewConnection)
-			{
-				session = this.BeginTransaction(isolationLevel);
-			}
-			else
-			{
-				session = _sessionStore.LocalSession;
-				if (session == null) 
-				{
-					throw new DataMapperException("SqlMap could not invoke BeginTransaction(). A session must be Open. Call OpenConnection() first.");
-				}
-				session.BeginTransaction(openNewConnection, isolationLevel);
-			}
-			return session;
-		}
+		//	if (openNewConnection)
+		//	{
+		//		session = this.BeginTransaction(isolationLevel);
+		//	}
+		//	else
+		//	{
+		//		session = _sessionStore.LocalSession;
+		//		if (session == null) 
+		//		{
+		//			throw new DataMapperException("SqlMap could not invoke BeginTransaction(). A session must be Open. Call OpenConnection() first.");
+		//		}
+		//		session.BeginTransaction(openNewConnection, isolationLevel);
+		//	}
+		//	return session;
+		//}
 
-		/// <summary>
-		/// Begins a transaction on the current connection
-		/// with the specified IsolationLevel value.
-		/// </summary>
-		/// <param name="isolationLevel">The transaction isolation level for this connection.</param>
-		/// <param name="connectionString">The connection string</param>
-		/// <param name="openNewConnection">Open a connection.</param>
-		public ISqlMapSession BeginTransaction(string connectionString, bool openNewConnection, IsolationLevel isolationLevel)
-		{
-			ISqlMapSession session = null;
+		///// <summary>
+		///// Begins a transaction on the current connection
+		///// with the specified IsolationLevel value.
+		///// </summary>
+		///// <param name="isolationLevel">The transaction isolation level for this connection.</param>
+		///// <param name="connectionString">The connection string</param>
+		///// <param name="openNewConnection">Open a connection.</param>
+		//public ISqlMapSession BeginTransaction(string connectionString, bool openNewConnection, IsolationLevel isolationLevel)
+		//{
+		//	ISqlMapSession session = null;
 
-			if (openNewConnection)
-			{
-				session = this.BeginTransaction(connectionString, isolationLevel);
-			}
-			else
-			{
-				session = _sessionStore.LocalSession;
-				if (session == null) 
-				{
-					throw new DataMapperException("SqlMap could not invoke BeginTransaction(). A session must be Open. Call OpenConnection() first.");
-				}
-				session.BeginTransaction(connectionString, openNewConnection, isolationLevel);
-			}
-			return session;
-		}
+		//	if (openNewConnection)
+		//	{
+		//		session = this.BeginTransaction(connectionString, isolationLevel);
+		//	}
+		//	else
+		//	{
+		//		session = _sessionStore.LocalSession;
+		//		if (session == null) 
+		//		{
+		//			throw new DataMapperException("SqlMap could not invoke BeginTransaction(). A session must be Open. Call OpenConnection() first.");
+		//		}
+		//		session.BeginTransaction(connectionString, openNewConnection, isolationLevel);
+		//	}
+		//	return session;
+		//}
 
-		/// <summary>
-		/// Commits the database transaction.
-		/// </summary>
-		/// <remarks>
-		/// Will close the connection.
-		/// </remarks>
-		public void CommitTransaction()
-		{
-			if (_sessionStore.LocalSession == null) 
-			{
-				throw new DataMapperException("SqlMap could not invoke CommitTransaction(). No Transaction was started. Call BeginTransaction() first.");
-			}
-			try
-			{
-				ISqlMapSession session = _sessionStore.LocalSession;
-				session.CommitTransaction();
-			} 
-			finally 
-			{
-				_sessionStore.Dispose();
-			}
-		}
+		///// <summary>
+		///// Commits the database transaction.
+		///// </summary>
+		///// <remarks>
+		///// Will close the connection.
+		///// </remarks>
+		//public void CommitTransaction()
+		//{
+		//	if (_sessionStore.LocalSession == null) 
+		//	{
+		//		throw new DataMapperException("SqlMap could not invoke CommitTransaction(). No Transaction was started. Call BeginTransaction() first.");
+		//	}
+		//	try
+		//	{
+		//		ISqlMapSession session = _sessionStore.LocalSession;
+		//		session.CommitTransaction();
+		//	} 
+		//	finally 
+		//	{
+		//		_sessionStore.Dispose();
+		//	}
+		//}
 
-		/// <summary>
-		/// Commits the database transaction.
-		/// </summary>
-		/// <param name="closeConnection">Close the connection</param>
-		public void CommitTransaction(bool closeConnection)
-		{
-			if (_sessionStore.LocalSession == null) 
-			{
-				throw new DataMapperException("SqlMap could not invoke CommitTransaction(). No Transaction was started. Call BeginTransaction() first.");
-			}
-			try
-			{
-				ISqlMapSession session = _sessionStore.LocalSession;
-				session.CommitTransaction(closeConnection);
-			} 
-			finally 
-			{
-				if (closeConnection)
-				{
-					_sessionStore.Dispose();
-				}
-			}
-		}
+		///// <summary>
+		///// Commits the database transaction.
+		///// </summary>
+		///// <param name="closeConnection">Close the connection</param>
+		//public void CommitTransaction(bool closeConnection)
+		//{
+		//	if (_sessionStore.LocalSession == null) 
+		//	{
+		//		throw new DataMapperException("SqlMap could not invoke CommitTransaction(). No Transaction was started. Call BeginTransaction() first.");
+		//	}
+		//	try
+		//	{
+		//		ISqlMapSession session = _sessionStore.LocalSession;
+		//		session.CommitTransaction(closeConnection);
+		//	} 
+		//	finally 
+		//	{
+		//		if (closeConnection)
+		//		{
+		//			_sessionStore.Dispose();
+		//		}
+		//	}
+		//}
 
-		/// <summary>
-		/// Rolls back a transaction from a pending state.
-		/// </summary>
-		/// <remarks>
-		/// Will close the connection.
-		/// </remarks>
-		public void RollBackTransaction()
-		{
-			if (_sessionStore.LocalSession == null) 
-			{
-				throw new DataMapperException("SqlMap could not invoke RollBackTransaction(). No Transaction was started. Call BeginTransaction() first.");
-			}
-			try
-			{
-				ISqlMapSession session = _sessionStore.LocalSession;
-				session.RollBackTransaction();			
-			} 
-			finally 
-			{
-				_sessionStore.Dispose();
-			}
-		}
+		///// <summary>
+		///// Rolls back a transaction from a pending state.
+		///// </summary>
+		///// <remarks>
+		///// Will close the connection.
+		///// </remarks>
+		//public void RollBackTransaction()
+		//{
+		//	if (_sessionStore.LocalSession == null) 
+		//	{
+		//		throw new DataMapperException("SqlMap could not invoke RollBackTransaction(). No Transaction was started. Call BeginTransaction() first.");
+		//	}
+		//	try
+		//	{
+		//		ISqlMapSession session = _sessionStore.LocalSession;
+		//		session.RollBackTransaction();			
+		//	} 
+		//	finally 
+		//	{
+		//		_sessionStore.Dispose();
+		//	}
+		//}
 
-		/// <summary>
-		/// Rolls back a transaction from a pending state.
-		/// </summary>
-		/// <param name="closeConnection">Close the connection</param>
-		public void RollBackTransaction(bool closeConnection)
-		{
-			if (_sessionStore.LocalSession == null) 
-			{
-				throw new DataMapperException("SqlMap could not invoke RollBackTransaction(). No Transaction was started. Call BeginTransaction() first.");
-			}
-			try
-			{
-				ISqlMapSession session = _sessionStore.LocalSession;
-				session.RollBackTransaction(closeConnection);			
-			} 
-			finally 
-			{
-				if (closeConnection)
-				{
-					_sessionStore.Dispose();
-				}
-			}
-		}
+		///// <summary>
+		///// Rolls back a transaction from a pending state.
+		///// </summary>
+		///// <param name="closeConnection">Close the connection</param>
+		//public void RollBackTransaction(bool closeConnection)
+		//{
+		//	if (_sessionStore.LocalSession == null) 
+		//	{
+		//		throw new DataMapperException("SqlMap could not invoke RollBackTransaction(). No Transaction was started. Call BeginTransaction() first.");
+		//	}
+		//	try
+		//	{
+		//		ISqlMapSession session = _sessionStore.LocalSession;
+		//		session.RollBackTransaction(closeConnection);			
+		//	} 
+		//	finally 
+		//	{
+		//		if (closeConnection)
+		//		{
+		//			_sessionStore.Dispose();
+		//		}
+		//	}
+		//}
 
 		#endregion
 		
@@ -514,36 +514,11 @@ namespace IBatisNet.DataMapper
 		/// <param name="statementName">The name of the sql statement to execute.</param>
 		/// <param name="parameterObject">The object used to set the parameters in the SQL.</param>
 		/// <returns> The single result object populated with the result set data.</returns>
-		public object QueryForObject(string statementName, object parameterObject)
+		public object QueryForObject(string statementName, object parameterObject, ISqlMapSession session)
 		{
-			bool isSessionLocal = false;
-			ISqlMapSession session = _sessionStore.LocalSession;
-			object result;
- 
-			if (session == null) 
-			{
-                session = CreateSqlMapSession();
-				isSessionLocal = true;
-			}
-
-			try 
-			{
-				IMappedStatement statement = GetMappedStatement(statementName);
-				result = statement.ExecuteQueryForObject(session, parameterObject);
-			} 
-			catch
-			{
-				throw;
-			}
-			finally
-			{
-				if ( isSessionLocal )
-				{
-					session.CloseConnection();
-				}
-			}
-
-			return result;
+			IMappedStatement statement = GetMappedStatement(statementName);
+			object result = statement.ExecuteQueryForObject(session, parameterObject);
+            return result;
 		}
 
 		/// <summary>
@@ -554,36 +529,12 @@ namespace IBatisNet.DataMapper
 		/// <param name="parameterObject">The object used to set the parameters in the SQL.</param>
 		/// <param name="resultObject">An object of the type to be returned.</param>
 		/// <returns>The single result object populated with the result set data.</returns>
-		public object QueryForObject(string statementName, object parameterObject, object resultObject)
+		public object QueryForObject(string statementName, object parameterObject, object resultObject, ISqlMapSession session)
 		{
-			bool isSessionLocal = false;
-			ISqlMapSession session = _sessionStore.LocalSession;
-			object result = null;
- 
-			if (session == null) 
-			{
-                session = CreateSqlMapSession();
-				isSessionLocal = true;
-			}
+			IMappedStatement statement = GetMappedStatement(statementName);
+			object result = statement.ExecuteQueryForObject(session, parameterObject, resultObject);
 
-			try 
-			{
-				IMappedStatement statement = GetMappedStatement(statementName);
-				result = statement.ExecuteQueryForObject(session, parameterObject, resultObject);
-			} 
-			catch
-			{
-				throw;
-			}
-			finally
-			{
-				if ( isSessionLocal )
-				{
-					session.CloseConnection();
-				}
-			}
-
-			return result;
+            return result;
 		}
 
         #endregion
@@ -602,34 +553,10 @@ namespace IBatisNet.DataMapper
         /// <param name="statementName">The name of the sql statement to execute.</param>
         /// <param name="parameterObject">The object used to set the parameters in the SQL.</param>
         /// <returns> The single result object populated with the result set data.</returns>
-        public T QueryForObject<T>(string statementName, object parameterObject)
+        public T QueryForObject<T>(string statementName, object parameterObject, ISqlMapSession session)
         {
-            bool isSessionLocal = false;
-            ISqlMapSession session = _sessionStore.LocalSession;
-            T result;
-
-            if (session == null)
-            {
-                session = CreateSqlMapSession();
-                isSessionLocal = true;
-            }
-
-            try
-            {
-                IMappedStatement statement = GetMappedStatement(statementName);
-                result = statement.ExecuteQueryForObject<T>(session, parameterObject);
-            }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                if (isSessionLocal)
-                {
-                    session.CloseConnection();
-                }
-            }
+            IMappedStatement statement = GetMappedStatement(statementName);
+            T result = statement.ExecuteQueryForObject<T>(session, parameterObject);
 
             return result;
         }
@@ -642,34 +569,10 @@ namespace IBatisNet.DataMapper
         /// <param name="parameterObject">The object used to set the parameters in the SQL.</param>
         /// <param name="instanceObject">An object of the type to be returned.</param>
         /// <returns>The single result object populated with the result set data.</returns>
-        public T QueryForObject<T>(string statementName, object parameterObject, T instanceObject)
+        public T QueryForObject<T>(string statementName, object parameterObject, T instanceObject, ISqlMapSession session)
         {
-            bool isSessionLocal = false;
-            ISqlMapSession session = _sessionStore.LocalSession;
-            T result = default(T);
-
-            if (session == null)
-            {
-                session = CreateSqlMapSession();
-                isSessionLocal = true;
-            }
-
-            try
-            {
-                IMappedStatement statement = GetMappedStatement(statementName);
-                result = statement.ExecuteQueryForObject<T>(session, parameterObject, instanceObject);
-            }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                if (isSessionLocal)
-                {
-                    session.CloseConnection();
-                }
-            }
+            IMappedStatement statement = GetMappedStatement(statementName);
+            T result = statement.ExecuteQueryForObject<T>(session, parameterObject, instanceObject);
 
             return result;
         }
@@ -686,9 +589,9 @@ namespace IBatisNet.DataMapper
 		/// <param name="parameterObject">The object used to set the parameters in the SQL.</param>
 		/// <param name="keyProperty">The property of the result object to be used as the key.</param>
 		/// <returns>A IDictionary (Hashtable) of object containing the rows keyed by keyProperty.</returns>
-		public IDictionary QueryForDictionary(string statementName, object parameterObject, string keyProperty)
+		public IDictionary QueryForDictionary(string statementName, object parameterObject, string keyProperty, ISqlMapSession session)
 		{
-			return QueryForMap( statementName, parameterObject, keyProperty);
+			return QueryForMap( statementName, parameterObject, keyProperty, session);
 		}
 
 		/// <summary>
@@ -701,9 +604,9 @@ namespace IBatisNet.DataMapper
 		/// <param name="valueProperty">The property of the result object to be used as the value (or null)</param>
 		/// <returns>A IDictionary (Hashtable) of object containing the rows keyed by keyProperty.</returns>
 		///<exception cref="DataMapperException">If a transaction is not in progress, or the database throws an exception.</exception>
-		public IDictionary QueryForDictionary(string statementName, object parameterObject, string keyProperty, string valueProperty)
+		public IDictionary QueryForDictionary(string statementName, object parameterObject, string keyProperty, string valueProperty, ISqlMapSession session)
 		{
-			return QueryForMap( statementName, parameterObject, keyProperty, valueProperty);
+			return QueryForMap( statementName, parameterObject, keyProperty, valueProperty, session);
 		}
 
 		/// <summary>
@@ -714,9 +617,9 @@ namespace IBatisNet.DataMapper
 		/// <param name="parameterObject">The object used to set the parameters in the SQL.</param>
 		/// <param name="keyProperty">The property of the result object to be used as the key.</param>
 		/// <returns>A IDictionary (Hashtable) of object containing the rows keyed by keyProperty.</returns>
-		public IDictionary QueryForMap(string statementName, object parameterObject, string keyProperty)
+		public IDictionary QueryForMap(string statementName, object parameterObject, string keyProperty, ISqlMapSession session)
 		{
-			return QueryForMap(statementName, parameterObject, keyProperty, null);
+			return QueryForMap(statementName, parameterObject, keyProperty, null, session);
 		}
 
 		/// <summary>
@@ -730,34 +633,10 @@ namespace IBatisNet.DataMapper
 		/// <param name="valueProperty">The property of the result object to be used as the value (or null)</param>
 		/// <returns>A IDictionary (Hashtable) of object containing the rows keyed by keyProperty.</returns>
 		///<exception cref="DataMapperException">If a transaction is not in progress, or the database throws an exception.</exception>
-		public IDictionary QueryForMap(string statementName, object parameterObject, string keyProperty, string valueProperty)
+		public IDictionary QueryForMap(string statementName, object parameterObject, string keyProperty, string valueProperty, ISqlMapSession session)
 		{
-			bool isSessionLocal = false;
-			ISqlMapSession session = _sessionStore.LocalSession;
-			IDictionary map = null;
- 
-			if (session == null) 
-			{
-                session = CreateSqlMapSession();
-				isSessionLocal = true;
-			}
-
-			try 
-			{
-				IMappedStatement statement = GetMappedStatement(statementName);
-				map = statement.ExecuteQueryForMap(session, parameterObject, keyProperty, valueProperty);
-			} 
-			catch
-			{
-				throw;
-			}
-			finally
-			{
-				if ( isSessionLocal )
-				{
-					session.CloseConnection();
-				}
-			}
+			IMappedStatement statement = GetMappedStatement(statementName);
+            IDictionary map = statement.ExecuteQueryForMap(session, parameterObject, keyProperty, valueProperty);
 
 			return map;
 		}
@@ -776,34 +655,10 @@ namespace IBatisNet.DataMapper
 		/// <param name="statementName">The name of the sql statement to execute.</param>
 		/// <param name="parameterObject">The object used to set the parameters in the SQL.</param>
 		/// <returns>A List of result objects.</returns>
-		public IList QueryForList(string statementName, object parameterObject)
+		public IList QueryForList(string statementName, object parameterObject, ISqlMapSession session)
 		{
-			bool isSessionLocal = false;
-			ISqlMapSession session = _sessionStore.LocalSession;
-			IList list;
- 
-			if (session == null) 
-			{
-                session = CreateSqlMapSession();
-				isSessionLocal = true;
-			}
-
-			try 
-			{
 				IMappedStatement statement = GetMappedStatement(statementName);
-				list = statement.ExecuteQueryForList(session, parameterObject);				
-			} 
-			catch
-			{
-				throw;
-			}
-			finally
-			{
-				if ( isSessionLocal )
-				{
-					session.CloseConnection();
-				}
-			}
+				IList list = statement.ExecuteQueryForList(session, parameterObject);				
 
 			return list;
 		}
@@ -819,34 +674,10 @@ namespace IBatisNet.DataMapper
 		/// <param name="skipResults">The number of rows to skip over.</param>
 		/// <param name="maxResults">The maximum number of rows to return.</param>
 		/// <returns>A List of result objects.</returns>
-		public IList QueryForList(string statementName, object parameterObject, int skipResults, int maxResults)	
+		public IList QueryForList(string statementName, object parameterObject, int skipResults, int maxResults, ISqlMapSession session)	
 		{
-			bool isSessionLocal = false;
-			ISqlMapSession session = _sessionStore.LocalSession;
-			IList list;
- 
-			if (session == null) 
-			{
-                session = CreateSqlMapSession();
-				isSessionLocal = true;
-			}
-
-			try 
-			{
 				IMappedStatement statement = GetMappedStatement(statementName);
-				list = statement.ExecuteQueryForList(session, parameterObject, skipResults, maxResults);
-			} 
-			catch
-			{
-				throw;
-			}
-			finally
-			{
-				if ( isSessionLocal )
-				{
-					session.CloseConnection();
-				}
-			}
+				IList list = statement.ExecuteQueryForList(session, parameterObject, skipResults, maxResults);
 
 			return list;
 		}
@@ -863,38 +694,12 @@ namespace IBatisNet.DataMapper
 		/// <param name="parameterObject">The object used to set the parameters in the SQL.</param>
 		/// <param name="resultObject">An Ilist object used to hold the objects.</param>
 		/// <returns>A List of result objects.</returns>
-		public void QueryForList(string statementName, object parameterObject, IList resultObject)
+		public void QueryForList(string statementName, object parameterObject, IList resultObject, ISqlMapSession session)
 		{
-			bool isSessionLocal = false;
-			ISqlMapSession session = _sessionStore.LocalSession;
- 
-			if (resultObject == null)
-			{
-				throw new DataMapperException("resultObject parameter must be instantiated before being passed to SqlMapper.QueryForList");
-			}
 
-			if (session == null) 
-			{
-                session = CreateSqlMapSession();
-				isSessionLocal = true;
-			}
-
-			try 
-			{
 				IMappedStatement statement = GetMappedStatement(statementName);
 				statement.ExecuteQueryForList(session, parameterObject, resultObject);
-			} 
-			catch
-			{
-				throw;
-			}
-			finally
-			{
-				if ( isSessionLocal )
-				{
-					session.CloseConnection();
-				}
-			}
+
 		}
 		
 		#endregion
@@ -913,34 +718,12 @@ namespace IBatisNet.DataMapper
         /// <param name="valueProperty">The property of the result object to be used as the value (or null)</param>
         /// <returns>A IDictionary of object containing the rows keyed by keyProperty.</returns>
         ///<exception cref="DataMapperException">If a transaction is not in progress, or the database throws an exception.</exception>
-        public IDictionary<K, V> QueryForDictionary<K, V>(string statementName, object parameterObject, string keyProperty, string valueProperty)
+        public IDictionary<K, V> QueryForDictionary<K, V>(string statementName, object parameterObject, string keyProperty, string valueProperty, ISqlMapSession session)
         {
-            bool isSessionLocal = false;
-            ISqlMapSession session = _sessionStore.LocalSession;
-            IDictionary<K, V> map = null;
 
-            if (session == null)
-            {
-                session = CreateSqlMapSession();
-                isSessionLocal = true;
-            }
-
-            try
-            {
                 IMappedStatement statement = GetMappedStatement(statementName);
-                map = statement.ExecuteQueryForDictionary<K, V>(session, parameterObject, keyProperty, valueProperty);
-            }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                if (isSessionLocal)
-                {
-                    session.CloseConnection();
-                }
-            }
+                IDictionary<K, V> map = statement.ExecuteQueryForDictionary<K, V>(session, parameterObject, keyProperty, valueProperty);
+
 
             return map;
         }
@@ -953,7 +736,7 @@ namespace IBatisNet.DataMapper
         /// <param name="parameterObject">The object used to set the parameters in the SQL.</param>
         /// <param name="keyProperty">The property of the result object to be used as the key.</param>
         /// <returns>A IDictionary of object containing the rows keyed by keyProperty.</returns>
-        public IDictionary<K, V> QueryForDictionary<K, V>(string statementName, object parameterObject, string keyProperty)
+        public IDictionary<K, V> QueryForDictionary<K, V>(string statementName, object parameterObject, string keyProperty, ISqlMapSession session)
         {
             return QueryForDictionary<K, V>(statementName, parameterObject, keyProperty, null);
         }
@@ -972,34 +755,12 @@ namespace IBatisNet.DataMapper
         /// <param name="rowDelegate">A delegate called once per row in the QueryForDictionary method></param>
         /// <returns>A IDictionary (Hashtable) of object containing the rows keyed by keyProperty.</returns>
         ///<exception cref="DataMapperException">If a transaction is not in progress, or the database throws an exception.</exception>
-        public IDictionary<K, V> QueryForDictionary<K, V>(string statementName, object parameterObject, string keyProperty, string valueProperty, DictionaryRowDelegate<K, V> rowDelegate)
+        public IDictionary<K, V> QueryForDictionary<K, V>(string statementName, object parameterObject, string keyProperty, string valueProperty, DictionaryRowDelegate<K, V> rowDelegate, ISqlMapSession session)
         {
-            bool isSessionLocal = false;
-            ISqlMapSession session = _sessionStore.LocalSession;
-            IDictionary<K, V> map = null;
 
-            if (session == null)
-            {
-                session = CreateSqlMapSession();
-                isSessionLocal = true;
-            }
-
-            try
-            {
                 IMappedStatement statement = GetMappedStatement(statementName);
-                map = statement.ExecuteQueryForDictionary<K, V>(session, parameterObject, keyProperty, valueProperty, rowDelegate);
-            }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                if (isSessionLocal)
-                {
-                    session.CloseConnection();
-                }
-            }
+                IDictionary<K, V> map = statement.ExecuteQueryForDictionary<K, V>(session, parameterObject, keyProperty, valueProperty, rowDelegate);
+
 
             return map;
         }
@@ -1015,34 +776,10 @@ namespace IBatisNet.DataMapper
         /// <param name="statementName">The name of the sql statement to execute.</param>
         /// <param name="parameterObject">The object used to set the parameters in the SQL.</param>
         /// <returns>A List of result objects.</returns>
-        public IList<T> QueryForList<T>(string statementName, object parameterObject)
+        public IList<T> QueryForList<T>(string statementName, object parameterObject, ISqlMapSession session)
         {
-            bool isSessionLocal = false;
-            ISqlMapSession session = _sessionStore.LocalSession;
-            IList<T> list;
-
-            if (session == null)
-            {
-                session = CreateSqlMapSession();
-                isSessionLocal = true;
-            }
-
-            try
-            {
                 IMappedStatement statement = GetMappedStatement(statementName);
-                list = statement.ExecuteQueryForList<T>(session, parameterObject);
-            }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                if (isSessionLocal)
-                {
-                    session.CloseConnection();
-                }
-            }
+                IList<T> list = statement.ExecuteQueryForList<T>(session, parameterObject);
 
             return list;
         }
@@ -1058,34 +795,10 @@ namespace IBatisNet.DataMapper
         /// <param name="skipResults">The number of rows to skip over.</param>
         /// <param name="maxResults">The maximum number of rows to return.</param>
         /// <returns>A List of result objects.</returns>
-        public IList<T> QueryForList<T>(string statementName, object parameterObject, int skipResults, int maxResults)
+        public IList<T> QueryForList<T>(string statementName, object parameterObject, int skipResults, int maxResults, ISqlMapSession session)
         {
-            bool isSessionLocal = false;
-            ISqlMapSession session = _sessionStore.LocalSession;
-            IList<T> list;
-
-            if (session == null)
-            {
-                session = CreateSqlMapSession();
-                isSessionLocal = true;
-            }
-
-            try
-            {
                 IMappedStatement statement = GetMappedStatement(statementName);
-                list = statement.ExecuteQueryForList<T>(session, parameterObject, skipResults, maxResults);
-            }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                if (isSessionLocal)
-                {
-                    session.CloseConnection();
-                }
-            }
+                IList<T> list = statement.ExecuteQueryForList<T>(session, parameterObject, skipResults, maxResults);
 
             return list;
         }
@@ -1101,38 +814,10 @@ namespace IBatisNet.DataMapper
         /// <param name="statementName">The name of the sql statement to execute.</param>
         /// <param name="parameterObject">The object used to set the parameters in the SQL.</param>
         /// <param name="resultObject">An Ilist object used to hold the objects.</param>
-        public void QueryForList<T>(string statementName, object parameterObject, IList<T> resultObject)
+        public void QueryForList<T>(string statementName, object parameterObject, IList<T> resultObject, ISqlMapSession session)
         {
-            bool isSessionLocal = false;
-            ISqlMapSession session = _sessionStore.LocalSession;
-
-            if (resultObject == null)
-            {
-                throw new DataMapperException("resultObject parameter must be instantiated before being passed to SqlMapper.QueryForList");
-            }
-
-            if (session == null)
-            {
-                session = CreateSqlMapSession();
-                isSessionLocal = true;
-            }
-
-            try
-            {
                 IMappedStatement statement = GetMappedStatement(statementName);
                 statement.ExecuteQueryForList(session, parameterObject, resultObject);
-            }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                if (isSessionLocal)
-                {
-                    session.CloseConnection();
-                }
-            }
         }
 #endif
         #endregion
@@ -1146,23 +831,10 @@ namespace IBatisNet.DataMapper
         /// <param name="statementName">Name of the statement.</param>
         /// <param name="parameterObject">The parameter object.</param>
         /// <returns></returns>
-        public DataTable QueryForDataTable(string statementName, object parameterObject)
+        public DataTable QueryForDataTable(string statementName, object parameterObject, ISqlMapSession session)
         {
-
-            bool isSessionLocal = false;
-            ISqlMapSession session = _sessionStore.LocalSession;
-            DataTable dataTable = null;
-
-            if (session == null)
-            {
-                session = CreateSqlMapSession();
-                isSessionLocal = true;
-            }
-
-            try
-            {
                 IMappedStatement statement = GetMappedStatement(statementName);
-                dataTable = new DataTable(statementName);
+                DataTable dataTable = new DataTable(statementName);
                 RequestScope request = statement.Statement.Sql.GetRequestScope(statement, parameterObject, session);
                 statement.PreparedCommand.Create(request, session, statement.Statement, parameterObject);
 
@@ -1173,14 +845,6 @@ namespace IBatisNet.DataMapper
                 }
 
 
-            }
-            finally
-            {
-                if (isSessionLocal)
-                {
-                    session.CloseConnection();
-                }
-            }
 
             return dataTable;
 
@@ -1196,10 +860,10 @@ namespace IBatisNet.DataMapper
 		/// <param name="pageSize">The maximum number of objects to store in each page</param>
 		/// <returns>A PaginatedList of beans containing the rows</returns>
         [Obsolete("This method will be remove in future version.", false)]
-		public PaginatedList QueryForPaginatedList(String statementName, object parameterObject, int pageSize)
+		public PaginatedList QueryForPaginatedList(String statementName, object parameterObject, int pageSize, ISqlMapSession session)
 		{
 			IMappedStatement statement = GetMappedStatement(statementName);
-			return new PaginatedList(statement, parameterObject, pageSize);
+			return new PaginatedList(statement, parameterObject, pageSize, session);
 		}
 		#endregion
 
@@ -1216,34 +880,10 @@ namespace IBatisNet.DataMapper
 		/// <param name="parameterObject">The object used to set the parameters in the SQL.</param>
 		/// <param name="rowDelegate"></param>
 		/// <returns>A List of result objects.</returns>
-		public IList QueryWithRowDelegate(string statementName, object parameterObject, RowDelegate rowDelegate)
+		public IList QueryWithRowDelegate(string statementName, object parameterObject, RowDelegate rowDelegate, ISqlMapSession session)
 		{
-			bool isSessionLocal = false;
-			ISqlMapSession session = _sessionStore.LocalSession;
-			IList list = null;
- 
-			if (session == null) 
-			{
-                session = CreateSqlMapSession();
-				isSessionLocal = true;
-			}
-
-			try 
-			{
 				IMappedStatement statement = GetMappedStatement(statementName);
-				list = statement.ExecuteQueryForRowDelegate(session, parameterObject, rowDelegate);
-			} 
-			catch
-			{
-				throw;
-			}
-			finally
-			{
-				if ( isSessionLocal )
-				{
-					session.CloseConnection();
-				}
-			}
+				IList list = statement.ExecuteQueryForRowDelegate(session, parameterObject, rowDelegate);
 
 			return list;
 		}
@@ -1260,34 +900,10 @@ namespace IBatisNet.DataMapper
         /// <param name="parameterObject">The object used to set the parameters in the SQL.</param>
         /// <param name="rowDelegate"></param>
         /// <returns>A List of result objects.</returns>
-        public IList<T> QueryWithRowDelegate<T>(string statementName, object parameterObject, RowDelegate<T> rowDelegate)
+        public IList<T> QueryWithRowDelegate<T>(string statementName, object parameterObject, RowDelegate<T> rowDelegate, ISqlMapSession session)
         {
-            bool isSessionLocal = false;
-            ISqlMapSession session = _sessionStore.LocalSession;
-            IList<T> list = null;
-
-            if (session == null)
-            {
-                session = CreateSqlMapSession();
-                isSessionLocal = true;
-            }
-
-            try
-            {
                 IMappedStatement statement = GetMappedStatement(statementName);
-                list = statement.ExecuteQueryForRowDelegate<T>(session, parameterObject, rowDelegate);
-            }
-            catch
-            {
-                throw;
-            }
-            finally
-            {
-                if (isSessionLocal)
-                {
-                    session.CloseConnection();
-                }
-            }
+                IList<T> list = statement.ExecuteQueryForRowDelegate<T>(session, parameterObject, rowDelegate);
 
             return list;
         }
@@ -1307,34 +923,10 @@ namespace IBatisNet.DataMapper
 		/// <param name="rowDelegate"></param>
 		/// <returns>A IDictionary (Hashtable) of object containing the rows keyed by keyProperty.</returns>
 		///<exception cref="DataMapperException">If a transaction is not in progress, or the database throws an exception.</exception>
-		public IDictionary QueryForMapWithRowDelegate(string statementName, object parameterObject, string keyProperty, string valueProperty, DictionaryRowDelegate rowDelegate)
+		public IDictionary QueryForMapWithRowDelegate(string statementName, object parameterObject, string keyProperty, string valueProperty, DictionaryRowDelegate rowDelegate, ISqlMapSession session)
 		{
-			bool isSessionLocal = false;
-			ISqlMapSession session = _sessionStore.LocalSession;
-			IDictionary map = null;
- 
-			if (session == null) 
-			{
-                session = CreateSqlMapSession();
-				isSessionLocal = true;
-			}
-
-			try 
-			{
 				IMappedStatement statement = GetMappedStatement(statementName);
-				map = statement.ExecuteQueryForMapWithRowDelegate(session, parameterObject, keyProperty, valueProperty, rowDelegate);
-			} 
-			catch
-			{
-				throw;
-			}
-			finally
-			{
-				if ( isSessionLocal )
-				{
-					session.CloseConnection();
-				}
-			}
+				IDictionary map = statement.ExecuteQueryForMapWithRowDelegate(session, parameterObject, keyProperty, valueProperty, rowDelegate);
 
 			return map;
 		}
@@ -1359,30 +951,10 @@ namespace IBatisNet.DataMapper
 		/// This might be automatically generated by the RDBMS, 
 		/// or selected from a sequence table or other source.
 		/// </returns>
-		public object Insert(string statementName, object parameterObject)
+		public object Insert(string statementName, object parameterObject, ISqlMapSession session)
 		{
-			bool isSessionLocal = false;
-			ISqlMapSession session = _sessionStore.LocalSession;
-			object generatedKey = null;
- 
-			if (session == null) 
-			{
-                session = CreateSqlMapSession();
-				isSessionLocal = true;
-			}
-
-			try 
-			{
 				IMappedStatement statement = GetMappedStatement(statementName);
-				generatedKey = statement.ExecuteInsert(session, parameterObject);
-			} 
-			finally
-			{
-				if ( isSessionLocal )
-				{
-					session.CloseConnection();
-				}
-			}
+				object generatedKey = statement.ExecuteInsert(session, parameterObject);
 
 			return generatedKey;
 		}
@@ -1399,34 +971,10 @@ namespace IBatisNet.DataMapper
 		/// <param name="statementName">The name of the statement to execute.</param>
 		/// <param name="parameterObject">The parameter object.</param>
 		/// <returns>The number of rows effected.</returns>
-		public int Update(string statementName, object parameterObject)
+		public int Update(string statementName, object parameterObject, ISqlMapSession session)
 		{
-			bool isSessionLocal = false;
-			ISqlMapSession session = _sessionStore.LocalSession;
-			int rows = 0; // the number of rows affected
-
-			if (session == null) 
-			{
-                session = CreateSqlMapSession();
-				isSessionLocal = true;
-			}
-
-			try 
-			{
 				IMappedStatement statement = GetMappedStatement(statementName);
-				rows = statement.ExecuteUpdate(session, parameterObject);
-			} 
-			catch
-			{
-				throw;
-			}
-			finally
-			{
-				if ( isSessionLocal )
-				{
-					session.CloseConnection();
-				}
-			}
+				int rows = statement.ExecuteUpdate(session, parameterObject);
 
 			return rows;
 		}
@@ -1438,34 +986,10 @@ namespace IBatisNet.DataMapper
 		/// <param name="statementName">The name of the statement to execute.</param>
 		/// <param name="parameterObject">The parameter object.</param>
 		/// <returns>The number of rows effected.</returns>
-		public int Delete(string statementName, object parameterObject)
+		public int Delete(string statementName, object parameterObject, ISqlMapSession session)
 		{
-			bool isSessionLocal = false;
-			ISqlMapSession session = _sessionStore.LocalSession;
-			int rows = 0; // the number of rows affected
-
-			if (session == null) 
-			{
-                session = CreateSqlMapSession();
-				isSessionLocal = true;
-			}
-
-			try 
-			{
 				IMappedStatement statement = GetMappedStatement(statementName);
-				rows = statement.ExecuteUpdate(session, parameterObject);
-			} 
-			catch
-			{
-				throw;
-			}
-			finally
-			{
-				if ( isSessionLocal )
-				{
-					session.CloseConnection();
-				}
-			}
+				int rows = statement.ExecuteUpdate(session, parameterObject);
 
 			return rows;
 		}

@@ -93,7 +93,8 @@ namespace IBatisNet.DataMapper.Proxy
                         _logger.Debug("Proxyfying call, query statement " + _statementId);
                     }
 
-                    _list = _sqlMap.QueryForList<T>(_statementId, _param);
+                    throw new InvalidOperationException("todo: find session");
+                    _list = _sqlMap.QueryForList<T>(_statementId, _param, null);
                     _loaded = true;
                     _setAccessor.Set(_target, _list);
                 }

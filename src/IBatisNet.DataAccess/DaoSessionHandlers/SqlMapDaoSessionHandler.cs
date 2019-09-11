@@ -128,7 +128,8 @@ namespace IBatisNet.DataAccess.DaoSessionHandlers
 		/// <returns></returns>
 		public DaoSession GetDaoSession(DaoManager daoManager)
 		{
-			return (new SqlMapDaoSession(daoManager, _sqlMap));
+            throw new Exception("figure out session");
+			//return (new SqlMapDaoSession(daoManager, _sqlMap));
 		}
 		#endregion
 
