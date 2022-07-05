@@ -23,8 +23,8 @@
  ********************************************************************************/
 #endregion
 
-using System.Runtime.Remoting.Messaging;
-using System.Web;
+using Microsoft.AspNetCore.Http;
+using MyBatis.DataMapper;
 
 namespace MyBatis.DataMapper.Session.Stores
 
@@ -55,7 +55,7 @@ namespace MyBatis.DataMapper.Session.Stores
 		{
 			get
 			{
-                HttpContext currentContext = HttpContext.Current;
+                HttpContext currentContext = HttpContextHelper.Current;
                 if (currentContext == null)
                 {
                     return (ISession)CallContext.GetData(sessionName); 
@@ -70,7 +70,7 @@ namespace MyBatis.DataMapper.Session.Stores
 		/// <param name="session">The session to store</param>
         public override void Store(ISession session)
 		{
-            HttpContext currentContext = HttpContext.Current;
+            HttpContext currentContext = HttpContextHelper.Current;
             if (currentContext == null)
             {
                 CallContext.SetData(sessionName, session);
@@ -86,7 +86,7 @@ namespace MyBatis.DataMapper.Session.Stores
 		/// </summary>
 		public override void Dispose()
 		{
-            HttpContext currentContext = HttpContext.Current;
+            HttpContext currentContext = HttpContextHelper.Current;
             if (currentContext == null)
             {
                 CallContext.SetData(sessionName, null);

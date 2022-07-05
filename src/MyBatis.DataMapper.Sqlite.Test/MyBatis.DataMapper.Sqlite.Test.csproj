@@ -1,21 +1,7 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{885CB96C-3038-496D-8F37-0A76C767B52D}</ProjectGuid>
+    <TargetFramework>net6.0</TargetFramework>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MyBatis.DataMapper.Sqlite.Test</RootNamespace>
-    <AssemblyName>MyBatis.DataMapper.Sqlite.Test</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <OldToolsVersion>3.5</OldToolsVersion>
-    <UpgradeBackupLocation />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -31,24 +17,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
@@ -62,98 +31,16 @@
     <Reference Include="NVelocity">
       <HintPath>..\External-Bin\Net\2.0\NVelocity.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core">
+    <Reference Update="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data.SQLite, Version=1.0.61.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\External-Bin\Net\2.0\System.Data.SQLite.DLL</HintPath>
     </Reference>
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Xml.Linq">
+    <Reference Update="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Domain\A.cs" />
-    <Compile Include="Domain\Account.cs" />
-    <Compile Include="Domain\AccountBis.cs" />
-    <Compile Include="Domain\AccountCollection.cs" />
-    <Compile Include="Domain\Address.cs" />
-    <Compile Include="Domain\Application.cs" />
-    <Compile Include="Domain\B.cs" />
-    <Compile Include="Domain\Book.cs" />
-    <Compile Include="Domain\C.cs" />
-    <Compile Include="Domain\Category.cs" />
-    <Compile Include="Domain\Child.cs" />
-    <Compile Include="Domain\Complex.cs" />
-    <Compile Include="Domain\ComplexStructure\ColumnDataTypeEnum.cs" />
-    <Compile Include="Domain\ComplexStructure\CustomField.cs" />
-    <Compile Include="Domain\ComplexStructure\Compare.cs" />
-    <Compile Include="Domain\ComplexStructure\DateCompare.cs" />
-    <Compile Include="Domain\ComplexStructure\Filter.cs" />
-    <Compile Include="Domain\ComplexStructure\Operator.cs" />
-    <Compile Include="Domain\ComplexStructure\Rules.cs" />
-    <Compile Include="Domain\Coupon.cs" />
-    <Compile Include="Domain\CustomInheritance.cs" />
-    <Compile Include="Domain\D.cs" />
-    <Compile Include="Domain\Document.cs" />
-    <Compile Include="Domain\DocumentCollection.cs" />
-    <Compile Include="Domain\E.cs" />
-    <Compile Include="Domain\Enumeration.cs" />
-    <Compile Include="Domain\F.cs" />
-    <Compile Include="Domain\GuidStringTypeHandlerCallback.cs" />
-    <Compile Include="Domain\HundredsTypeHandlerCallback.cs" />
-    <Compile Include="Domain\ImmutableCategory.cs" />
-    <Compile Include="Domain\ImmutableCategoryPropertyContainer.cs" />
-    <Compile Include="Domain\Item.cs" />
-    <Compile Include="Domain\JsonInterpreter.cs" />
-    <Compile Include="Domain\LineItem.cs" />
-    <Compile Include="Domain\LineItemCollection.cs" />
-    <Compile Include="Domain\LineItemCollection2.cs" />
-    <Compile Include="Domain\ListeEntiteMetier.cs" />
-    <Compile Include="Domain\Newspaper.cs" />
-    <Compile Include="Domain\Nullable.cs" />
-    <Compile Include="Domain\NVelocityDynamicEngine.cs" />
-    <Compile Include="Domain\OneZeroBoolTypeHandlerCallback.cs" />
-    <Compile Include="Domain\Order.cs" />
-    <Compile Include="Domain\Other.cs" />
-    <Compile Include="Domain\OuiNonBoolTypeHandlerCallback.cs" />
-    <Compile Include="Domain\Parent.cs" />
-    <Compile Include="Domain\Petshop\Category.cs" />
-    <Compile Include="Domain\Petshop\Item.cs" />
-    <Compile Include="Domain\Petshop\Product.cs" />
-    <Compile Include="Domain\Product.cs" />
-    <Compile Include="Domain\Query.cs" />
-    <Compile Include="Domain\Role.cs" />
-    <Compile Include="Domain\Sample.cs" />
-    <Compile Include="Domain\Search.cs" />
-    <Compile Include="Domain\Simple.cs" />
-    <Compile Include="Domain\SimpleSqlSource.cs" />
-    <Compile Include="Domain\SqlSourceWithInlineParameter.cs" />
-    <Compile Include="Domain\SqlSourceWithParameter.cs" />
-    <Compile Include="Domain\User.cs" />
-    <Compile Include="Fixtures\BaseTest.cs" />
-    <Compile Include="Fixtures\CodeConfigurationInterpreterTestFixture.cs" />
-    <Compile Include="Fixtures\ComplexBindNestedIterateTestFixture.cs" />
-    <Compile Include="Fixtures\DefaultModelBuilderTest.cs" />
-    <Compile Include="Fixtures\Mapping\CacheTest.cs" />
-    <Compile Include="Fixtures\Modules\AccountModule.cs" />
-    <Compile Include="Fixtures\Modules\AliasModule.cs" />
-    <Compile Include="Fixtures\Modules\DocumentModule.cs" />
-    <Compile Include="Fixtures\Modules\EventModule.cs" />
-    <Compile Include="Fixtures\Modules\ModuleConfigurationTest.cs" />
-    <Compile Include="Fixtures\Modules\ParameterMapModuleTest.cs" />
-    <Compile Include="Fixtures\Modules\ResultMapModuleTest.cs" />
-    <Compile Include="Fixtures\PreserveWhitespaceTestFixture.cs" />
-    <Compile Include="Fixtures\ScriptBase.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Maps\Account.xml" />
@@ -199,17 +86,10 @@
     <EmbeddedResource Include="providers.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <None Include="Scripts\account-init.sql" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MyBatis.Common\MyBatis.Common.csproj">
-      <Project>{BBC8DA4A-EA88-41D9-8B93-929B8F3ADADE}</Project>
-      <Name>Apache.Ibatis.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MyBatis.DataMapper\MyBatis.DataMapper.csproj">
-      <Project>{F3E45F39-3224-4EAD-B138-EB5CC0E32824}</Project>
-      <Name>Apache.Ibatis.DataMapper</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\MyBatis.Common\MyBatis.Common.csproj" />
+    <ProjectReference Include="..\MyBatis.DataMapper\MyBatis.DataMapper.csproj" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -228,12 +108,10 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+  <ItemGroup>
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
+    <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.3.330701">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
 </Project>

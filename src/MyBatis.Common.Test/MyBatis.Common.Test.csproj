@@ -1,17 +1,9 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
     <ProjectType>Local</ProjectType>
-    <ProductVersion>9.0.30729</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{5961F3DE-CB5E-40FE-AE89-D00D6E453907}</ProjectGuid>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ApplicationIcon>
-    </ApplicationIcon>
     <AssemblyKeyContainerName>
     </AssemblyKeyContainerName>
-    <AssemblyName>MyBatis.Common.Test</AssemblyName>
     <AssemblyOriginatorKeyFile>
     </AssemblyOriginatorKeyFile>
     <DefaultClientScript>JScript</DefaultClientScript>
@@ -19,16 +11,9 @@
     <DefaultTargetSchema>IE50</DefaultTargetSchema>
     <DelaySign>false</DelaySign>
     <OutputType>Library</OutputType>
-    <RootNamespace>MyBatis.Common.Test</RootNamespace>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
     <StartupObject>
     </StartupObject>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <UpgradeBackupLocation>
-    </UpgradeBackupLocation>
-    <OldToolsVersion>3.5</OldToolsVersion>
-    <TargetFrameworkVersion>v3.0</TargetFrameworkVersion>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -44,53 +29,37 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <OutputPath>bin\Debug\</OutputPath>
-    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
     <BaseAddress>285212672</BaseAddress>
-    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
     <ConfigurationOverrideFile>
     </ConfigurationOverrideFile>
     <DefineConstants>TRACE;DEBUG;dotnet2</DefineConstants>
     <DocumentationFile>
     </DocumentationFile>
-    <DebugSymbols>true</DebugSymbols>
     <FileAlignment>4096</FileAlignment>
     <NoStdLib>false</NoStdLib>
     <NoWarn>
     </NoWarn>
-    <Optimize>false</Optimize>
     <RegisterForComInterop>false</RegisterForComInterop>
     <RemoveIntegerChecks>false</RemoveIntegerChecks>
-    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
-    <WarningLevel>4</WarningLevel>
-    <DebugType>full</DebugType>
-    <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <OutputPath>bin\Release\</OutputPath>
-    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
     <BaseAddress>285212672</BaseAddress>
-    <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
     <ConfigurationOverrideFile>
     </ConfigurationOverrideFile>
     <DefineConstants>TRACE;dotnet2</DefineConstants>
     <DocumentationFile>
     </DocumentationFile>
-    <DebugSymbols>false</DebugSymbols>
     <FileAlignment>4096</FileAlignment>
     <NoStdLib>false</NoStdLib>
     <NoWarn>
     </NoWarn>
-    <Optimize>true</Optimize>
     <RegisterForComInterop>false</RegisterForComInterop>
     <RemoveIntegerChecks>false</RemoveIntegerChecks>
-    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
-    <WarningLevel>4</WarningLevel>
     <DebugType>none</DebugType>
-    <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
@@ -102,68 +71,21 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\External-Bin\Net\2.0\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="System">
+    <Reference Update="System">
       <Name>System</Name>
     </Reference>
-    <Reference Include="System.configuration" />
-    <Reference Include="System.Data">
+    <Reference Update="System.Data">
       <Name>System.Data</Name>
     </Reference>
-    <Reference Include="System.Drawing">
+    <Reference Update="System.Drawing">
       <Name>System.Drawing</Name>
     </Reference>
-    <Reference Include="System.Xml">
+    <Reference Update="System.Xml">
       <Name>System.XML</Name>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyInfo.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Domain\Account.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Domain\Address.cs" />
-    <Compile Include="Domain\BaseDomain.cs" />
-    <Compile Include="Domain\Book.cs" />
-    <Compile Include="Domain\Document.cs" />
-    <Compile Include="Domain\DocumentCollection.cs" />
-    <Compile Include="Domain\GenericDocumentCollection.cs" />
-    <Compile Include="Domain\IAddress.cs" />
-    <Compile Include="Domain\IBaseDomain.cs" />
-    <Compile Include="Domain\Item.cs" />
-    <Compile Include="Domain\IUser.cs" />
-    <Compile Include="Domain\Order.cs" />
-    <Compile Include="Domain\Property.cs" />
-    <Compile Include="Domain\Simple.cs" />
-    <Compile Include="Domain\User.cs" />
-    <Compile Include="Fixtures\ConfigWatcher\ConfigWatcherTest.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Fixtures\Contracts\EnsureTest.cs" />
-    <Compile Include="Fixtures\Contracts\RequireTest.cs" />
-    <Compile Include="Fixtures\Logging\LogTest.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Fixtures\Resources\AssemblyResourceLoaderTest.cs" />
-    <Compile Include="Fixtures\Resources\CustomUriBuilderTest.cs" />
-    <Compile Include="Fixtures\Resources\UrlResourceLoaderTest.cs" />
-    <Compile Include="Fixtures\Utilities\BaseMemberTest.cs" />
-    <Compile Include="Fixtures\Utilities\FieldAccessorTest.cs" />
-    <Compile Include="Fixtures\Resources\FileResourceLoaderTest.cs" />
-    <Compile Include="Fixtures\Utilities\ObjectFactoryTest.cs" />
-    <Compile Include="Fixtures\Utilities\PropertyAccessorPerformance.cs" />
-    <Compile Include="Fixtures\Utilities\PropertyAccessorTest.cs" />
-    <Compile Include="Fixtures\Utilities\ProtectedFieldAccessorTest.cs" />
-    <Compile Include="Fixtures\Utilities\PublicFieldAccessorTest.cs" />
-    <Compile Include="Fixtures\Utilities\ReflectionInfoTest.cs" />
-    <Compile Include="Fixtures\Resources\ResourcesTest.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Fixtures\Utilities\Timer.cs" />
-    <Compile Include="Fixtures\Utilities\TypeResolverTest.cs" />
-    <Compile Include="Fixtures\Utilities\TypeUtilsTest.cs" />
-    <None Include="App.config" />
+    <Content Include="appsettings.json" />
     <None Include="bin\Debug\SqlMap_MSSQL_SqlClient.config" />
     <None Include="bin\Debug\test.config" />
     <Content Include="bin\Debug\OctopusService.dll" />
@@ -223,15 +145,11 @@
     <Content Include="Scripts\Oracle\user-init.sql" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MyBatis.Common\MyBatis.Common.csproj">
-      <Project>{BBC8DA4A-EA88-41D9-8B93-929B8F3ADADE}</Project>
-      <Name>Apache.Ibatis.Common</Name>
-    </ProjectReference>
+    <ProjectReference Include="..\MyBatis.Common\MyBatis.Common.csproj" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="properties.xml" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
       <Visible>False</Visible>
@@ -249,11 +167,18 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PreBuildEvent>
-    </PreBuildEvent>
-    <PostBuildEvent>
-    </PostBuildEvent>
-  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Fixtures\CommonTests\Transaction\BaseTest.cs" />
+    <Compile Remove="Fixtures\CommonTests\Transaction\TransactionTest.cs" />
+    <Compile Remove="Fixtures\Utilities\AssemblyResourceLoaderTest.cs" />
+    <Compile Remove="Fixtures\Utilities\FileResourceLoaderTest.cs" />
+    <Compile Remove="Fixtures\Utilities\ResourcesTest.cs" />
+  </ItemGroup>
+  <PropertyGroup />
+  <ItemGroup>
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
+    <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.3.330701">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+  </ItemGroup>
 </Project>

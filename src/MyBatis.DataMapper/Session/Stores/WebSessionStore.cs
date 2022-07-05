@@ -23,8 +23,9 @@
  ********************************************************************************/
 #endregion
 
-using System.Web;
+using Microsoft.AspNetCore.Http;
 using MyBatis.Common.Exceptions;
+using MyBatis.DataMapper;
 
 namespace MyBatis.DataMapper.Session.Stores
 {
@@ -79,7 +80,7 @@ namespace MyBatis.DataMapper.Session.Stores
 		
 		private static HttpContext ObtainSessionContext()
 		{
-			HttpContext currentContext = HttpContext.Current;
+			HttpContext currentContext = HttpContextHelper.Current;
 	
 			if (currentContext == null)
 			{

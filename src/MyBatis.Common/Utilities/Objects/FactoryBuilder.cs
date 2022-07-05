@@ -51,7 +51,7 @@ namespace MyBatis.Common.Utilities.Objects
             assemblyName.Name = "iBATIS.EmitFactory" + HashCodeProvider.GetIdentityHashCode(this);
 
 			// Create a new assembly with one module
-			AssemblyBuilder _assemblyBuilder = AppDomain.CurrentDomain.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
+			AssemblyBuilder _assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
 			_moduleBuilder = _assemblyBuilder.DefineDynamicModule(assemblyName.Name + ".dll");
 		}
 

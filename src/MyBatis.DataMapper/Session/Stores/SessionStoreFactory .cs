@@ -1,3 +1,4 @@
+using MyBatis.DataMapper;
 #region Apache Notice
 /*****************************************************************************
  * $Header: $
@@ -43,7 +44,7 @@ namespace MyBatis.DataMapper.Session.Stores
         /// <returns></returns>
         static public ISessionStore GetSessionStore(string Id)
         {
-            if (System.Web.HttpContext.Current == null)
+            if (HttpContextHelper.Current == null)
 			{
                 return new CallContextSessionStore(Id);
 			}
